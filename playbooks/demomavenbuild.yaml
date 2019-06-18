@@ -44,19 +44,13 @@
     - set_fact:
        pull_id="{{pullid.stdout}}"
     - shell: |
-           curl https://api.github.com/repos/{{ zuul.project.name }}/pulls/{{ pull_id }} | jq .user.login
+           curl -s https://api.github.com/repos/{{ zuul.project.name }}/pulls/{{ pull_id }} | jq .user.login
       register: user
     - name: pull requested user
       debug:
        msg: "{{ user }}"
     - shell: |
-           curl https://api.github.com/repos/{{ zuul.project.name }}/pulls/{{ pull_id }} | jq .user.url
-      register: user_url
-    - name: pull requested users URL
-      debug:
-       msg: "{{ user_url }}"
-    - shell: |
-           curl {{ user_url }} | jq .location
+           curl -s https://api.github.com/users/{{ user }} | jq .location
       register: user_location
     - name: pull requested user
       debug:
