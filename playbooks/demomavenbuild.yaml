@@ -37,7 +37,7 @@
       register: pullid
     - name: checking the canonical name
       debug:
-       msg: "{{ zuul.canonical_name }}"
+       msg: "{{ zuul.project.canonical_name }}"
     - name: testing of kumar
       debug:
        msg: "{{ pullid }}"
