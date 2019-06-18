@@ -1,0 +1,50 @@
+- nodeset:
+    name: emea-node
+    nodes:
+      - name: node
+        label: ubuntu-bionic
+      - name: node3
+        label: ubuntu-node3
+- nodeset:
+    name: nafta-node
+    nodes:
+      - name: node2
+        label: centos76
+
+- job:
+    name: demomavenbuildjob
+    run: playbooks/demomavenbuild.yaml
+    parent: base
+
+- job:
+    name: checklabel_emea
+    run: playbooks/checklabel_emea.yaml
+    parent: base
+    nodeset:
+      nodes:
+        - name: node
+          label: centos76
+- job:
+    name: checklabel_nafta
+    run: playbooks/checklabel_nafta.yaml
+    parent: base
+    nodeset:
+      nodes:
+        - name: node
+          label: centos76
+
+- project:
+    checklabel_emea:
+      jobs:
+        - checklabel_emea
+    checklabel_nafta:
+      jobs:
+        - checklabel_nafta
+    check_emea:
+      jobs:
+       - demomavenbuildjob:
+           nodeset: emea-node
+    check_nafta:
+      jobs:
+       - demomavenbuildjob:
+           nodeset: nafta-node
