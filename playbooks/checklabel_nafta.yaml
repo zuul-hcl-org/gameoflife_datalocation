@@ -1,0 +1,5 @@
+- hosts: all
+  tasks:
+    - name: pull request dependent job
+      debug:
+        msg: "In Check label nafta"
