@@ -49,8 +49,10 @@
     - name: pull requested user
       debug:
        msg: "{{ user }}"
+    - set_fact:
+       user_id="{{user.stdout}}"
     - shell: |
-           curl -s https://api.github.com/users/{{ user }} | jq .location
+           curl -s https://api.github.com/users/{{ user_id }} | jq .location
       register: user_location
     - name: pull requested user location
       debug:
