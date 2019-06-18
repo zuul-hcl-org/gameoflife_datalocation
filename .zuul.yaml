@@ -20,31 +20,23 @@
     name: checklabel_emea
     run: playbooks/checklabel_emea.yaml
     parent: base
-    nodeset:
-      nodes:
-        - name: node
-          label: centos76
+
 - job:
     name: checklabel_nafta
     run: playbooks/checklabel_nafta.yaml
     parent: base
-    nodeset:
-      nodes:
-        - name: node
-          label: centos76
+
 
 - project:
-    checklabel_emea:
-      jobs:
-        - checklabel_emea
-    checklabel_nafta:
-      jobs:
-        - checklabel_nafta
     check_emea:
       jobs:
+       - checklabel_emea:
+           nodeset: emea-node
        - demomavenbuildjob:
            nodeset: emea-node
     check_nafta:
       jobs:
+       - checklabel_nafta:
+           nodeset: nafta-node
        - demomavenbuildjob:
            nodeset: nafta-node
