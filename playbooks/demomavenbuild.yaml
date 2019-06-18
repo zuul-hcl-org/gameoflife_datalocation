@@ -37,14 +37,14 @@
       register: pullid
     - name: checking the canonical name
       debug:
-       msg: "{{ zuul.project.canonical_name }}"
+       msg: "{{ zuul.project.name }}"
     - name: testing of kumar
       debug:
        msg: "{{ pullid }}"
     - set_fact:
        pull_id="{{pullid.stdout}}"
     - shell: |
-           curl https://api.github.com/repos/zuul-hcl-org/game-of-life-demo/pulls/{{ pull_id }} | jq .user.login
+           curl https://api.github.com/repos/{{ zuul.project.name }}/pulls/{{ pull_id }} | jq .user.login
       register: user
     - name: pull requested user
       debug:
