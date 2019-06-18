@@ -28,15 +28,19 @@
 
 
 - project:
-    check_emea:
+    checklabel_emea:
       jobs:
        - checklabel_emea:
            nodeset: emea-node
+    checklabel_nafta:
+      jobs:
+       - checklabel_nafta:
+           nodeset: nafta-node
+    check_emea:
+      jobs:
        - demomavenbuildjob:
            nodeset: emea-node
     check_nafta:
       jobs:
-       - checklabel_nafta:
-           nodeset: nafta-node
        - demomavenbuildjob:
            nodeset: nafta-node
