@@ -18,6 +18,9 @@
     name: demomavenbuildjob
     run: playbooks/demomavenbuild.yaml
     parent: base
+    group-vars:
+      emea-vars:
+        myname: "juhi"
 #    vars:
 #      emea_jfrog: "http://172.31.27.120:9081"
 #      nafta_jfrog: "http://172.31.20.75:9082"
@@ -26,10 +29,7 @@
     name: checklabel_emea
     run: playbooks/checklabel_emea.yaml
     parent: base
-    group-vars:
-      emea-vars:
-        myname: "juhi"
-
+    
 - job:
     name: checklabel_nafta
     run: playbooks/checklabel_nafta.yaml
