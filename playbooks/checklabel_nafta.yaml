@@ -73,5 +73,3 @@
       zuul_return:
         data:
           zuul_location: " {{ user_location.stdout }} "
-    - debug:
-        msg: "{{ zuul_location }}"
