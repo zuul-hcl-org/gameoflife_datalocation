@@ -57,7 +57,7 @@
     check_nafta:
       jobs:
         - demomavenbuildjob:
-#            host-vars: 
-#              node2:
-#                nafta_jfrog: "sample test 2"
+            host-vars: 
+              node2:
+                nafta_jfrog: "http://172.31.20.175:9082"
             nodeset: nafta-node
