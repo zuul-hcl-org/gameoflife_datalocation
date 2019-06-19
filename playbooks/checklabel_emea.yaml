@@ -28,7 +28,7 @@
     - shell: |
            curl -s https://api.github.com/users/{{ user_id }} | jq .location
       register: user_location
-      failed_when: user_location not in 'emea'
+      failed_when: {{ user_location }} not in 'emea'
     - name: pull requested user location
       debug:
        msg: "{{ user_location }}"
