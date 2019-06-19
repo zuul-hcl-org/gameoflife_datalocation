@@ -18,9 +18,9 @@
     name: demomavenbuildjob
     run: playbooks/demomavenbuild.yaml
     parent: base
-    group-vars:
-      emea-vars:
-        myname: "juhi"
+#    group-vars:
+#      emea-vars:
+#        myname: "juhi"
 #    vars:
 #      emea_jfrog: "http://172.31.27.120:9081"
 #      nafta_jfrog: "http://172.31.20.75:9082"
@@ -50,7 +50,9 @@
     check_emea:
       jobs:
         - demomavenbuildjob:
- #           vars:
+            group-vars:
+               emea-vars:
+                 myname: "juhi"
  #             emea_jfrog: "http://172.31.27.120:9081"
             nodeset: emea-node
     check_nafta:
