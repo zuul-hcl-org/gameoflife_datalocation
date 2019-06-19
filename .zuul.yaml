@@ -51,11 +51,13 @@
       jobs:
         - demomavenbuildjob:
             host-vars:
-              emea_jfrog: "http://172.31.27.120:9081"
+              node:
+                emea_jfrog: "http://172.31.27.120:9081"
             nodeset: emea-node
     check_nafta:
       jobs:
         - demomavenbuildjob:
             host-vars: 
-              nafta_jfrog: "http://172.31.20.75:9082"
+              node2:
+                nafta_jfrog: "http://172.31.20.75:9082"
             nodeset: nafta-node
