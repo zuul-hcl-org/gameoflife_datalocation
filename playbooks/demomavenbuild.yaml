@@ -2,10 +2,10 @@
   tasks:
     - debug:
         msg: "running for gameof life demo"
-    - debug: 
-         msg: "{{ emea_jfrog }}"
-    - debug:
-        msg: "{{ nafta_jfrog }}"
+#    - debug: 
+#         msg: "{{ emea_jfrog }}"
+#    - debug:
+#        msg: "{{ nafta_jfrog }}"
         
     - name: "Deleted the workspace dir before build"
       shell: |
@@ -25,7 +25,7 @@
       
     - name: Push artifacts to jfrog repository
       uri:
-        url: http://172.31.27.120:9081/artifactory/generic-local/gameoflife.war
+        url: {{ nafta_jfrog }}/artifactory/generic-local/gameoflife.war
         #when: zuul_location in emea
         validate_certs: no
         method: PUT
