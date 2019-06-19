@@ -3,6 +3,11 @@
     nodes:
       - name: node
         label: ubuntu-bionic
+    groups:
+      - name: emea-vars
+        nodes:
+         - node
+         
 - nodeset:
     name: nafta-node
     nodes:
@@ -21,6 +26,9 @@
     name: checklabel_emea
     run: playbooks/checklabel_emea.yaml
     parent: base
+    group-vars:
+      emea-vars:
+        myname: "juhi"
 
 - job:
     name: checklabel_nafta
@@ -29,8 +37,8 @@
 
 
 - project:
-    vars:
-      myname: "juhi"
+#    vars:
+#      myname: "juhi"
     checklabel_emea:
       jobs:
        - checklabel_emea:
