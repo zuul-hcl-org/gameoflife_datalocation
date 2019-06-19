@@ -50,10 +50,10 @@
     check_emea:
       jobs:
         - demomavenbuildjob:
-            vars:
-              myname: "juhi"
+#            vars:
+#              myname: "juhi"
  #             emea_jfrog: "http://172.31.27.120:9081"
-           nodeset: emea-node
+            nodeset: emea-node
     check_nafta:
       jobs:
         - demomavenbuildjob:
