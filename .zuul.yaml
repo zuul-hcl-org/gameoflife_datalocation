@@ -29,6 +29,7 @@
 
 
 - project:
+    name: testproject
     checklabel_emea:
       jobs:
        - checklabel_emea:
