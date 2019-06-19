@@ -5,7 +5,7 @@
 #    - debug: 
 #         msg: "{{ emea_jfrog }}"
     - debug:
-        msg: "{{ zuul_location }}"
+        msg: "{{ user_location }}"
         
     - name: "Deleted the workspace dir before build"
       shell: |
