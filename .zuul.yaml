@@ -37,8 +37,12 @@
     check_emea:
       jobs:
        - demomavenbuildjob:
+           vars:
+             emea_jfrog: https://52.66.200.85:9081
            nodeset: emea-node
     check_nafta:
       jobs:
        - demomavenbuildjob:
+           vars:
+             nafta_jfrog: https://35.154.28.215:9082
            nodeset: nafta-node
