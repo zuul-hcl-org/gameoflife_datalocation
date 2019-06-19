@@ -5,7 +5,7 @@
 #    - debug: 
 #         msg: "{{ emea_jfrog }}"
     - debug:
-        msg: "{{ hostvars[inventory_hostname] }}"
+        msg: "{{ nafta_jfrog }}"
         
     - name: "Deleted the workspace dir before build"
       shell: |
