@@ -29,7 +29,6 @@
 
 
 - project:
-    name: testproject
     vars:
       myname: "juhi"
     checklabel_emea:
