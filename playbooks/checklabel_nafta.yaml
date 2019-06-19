@@ -36,3 +36,42 @@
       zuul_return:
         data:
           zuul_location: " {{ user_location }} "
+     - hosts: all
+  tasks:
+    - name: pull request dependent job
+      debug:
+        msg: "In Check label emea job"
+    - name: change url
+      debug:
+       msg: "{{ zuul.change_url }}"
+    - shell: |
+         echo {{ zuul.change_url }} | cut -d '/' -f 7
+      register: pullid
+    - name: checking the canonical name
+      debug:
+       msg: "{{ zuul.project.name }}"
+    - name: print the pull id
+      debug:
+       msg: "{{ pullid }}"
+    - set_fact:
+       pull_id="{{pullid.stdout}}"
+    - shell: |
+           curl -s https://api.github.com/repos/{{ zuul.project.name }}/pulls/{{ pull_id }} | jq .user.login
+      register: user
+    - name: pull requested user
+      debug:
+       msg: "{{ user }}"
+    - set_fact:
+       user_id="{{user.stdout}}"
+    - shell: |
+           curl -s https://api.github.com/users/{{ user_id }} | jq .location
+      register: user_location
+    - name: pull requested user location
+      debug:
+       msg: "{{ user_location }}"
+    - name: "zuul return task"
+      zuul_return:
+        data:
+          zuul_location: " {{ user_location.stdout }} "
+    - debug:
+        msg: "{{ zuul_location }}"
