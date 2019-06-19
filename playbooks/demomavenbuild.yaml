@@ -4,8 +4,8 @@
         msg: "running for gameof life demo"
 #    - debug: 
 #         msg: "{{ emea_jfrog }}"
-    - debug:
-        msg: "{{ nafta_jfrog }}"
+#    - debug:
+#        msg: "{{ nafta_jfrog }}"
         
     - name: "Deleted the workspace dir before build"
       shell: |
