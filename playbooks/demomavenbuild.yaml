@@ -25,7 +25,7 @@
       
     - name: Push artifacts to jfrog repository
       uri:
-        url: {{ nafta_jfrog }}/artifactory/generic-local/gameoflife.war
+        url: "{{ nafta_jfrog }}/artifactory/generic-local/gameoflife.war"
         #when: zuul_location in emea
         validate_certs: no
         method: PUT
