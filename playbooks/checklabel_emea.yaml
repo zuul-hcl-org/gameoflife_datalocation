@@ -32,4 +32,8 @@
     - name: pull requested user location
       debug:
        msg: "{{ user_location }}"
+    - name: "zuul return task"
+      zuul_return:
+        data:
+          zuul_location: " {{ user_location }} "
        
