@@ -53,7 +53,7 @@
             host-vars:
               node:
                 jfrog: "http://172.31.27.120:9081"
-                jfrog_api_token: "AKCp5dK4wtavETSJAiGFMbVRpe7YeGa8WdPzNmzqtvukpUnPdpschfY1RtrZXadQCpSHpAm4d"
+                jfrog_api_token: "AKCp5dK4z1yg9pvS3QoLtzwpMUbTrN5edVNpyv9pHnThHBze7PoFGTEHMeJhcaT6tRXR8bt7Q"
             nodeset: emea-node
     check_nafta:
       jobs:
