@@ -25,12 +25,12 @@
       
     - name: Push artifacts to jfrog repository
       uri:
-        url: "{{ nafta_jfrog }}/artifactory/generic-local/gameoflife.war"
+        url: "{{ jfrog }}/artifactory/generic-local/gameoflife.war"
         #when: zuul_location in emea
         validate_certs: no
         method: PUT
         headers:
-          X-JFrog-Art-Api: AKCp5dK4wtavETSJAiGFMbVRpe7YeGa8WdPzNmzqtvukpUnPdpschfY1RtrZXadQCpSHpAm4d
+          X-JFrog-Art-Api: "{{ jfrog_api_token }}"
         src: ~/work/gameoflife-web/target/gameoflife.war
         status_code: 201
         remote_src: yes
