@@ -14,8 +14,8 @@
     run: playbooks/demomavenbuild.yaml
     parent: base
     vars:
-      emea_jfrog: "emea var"
-      nafta_jfrog: "nafta var"
+      emea_jfrog: "http://172.31.27.120:9081"
+      nafta_jfrog: "http://172.31.20.75:9082"
 
 - job:
     name: checklabel_emea
