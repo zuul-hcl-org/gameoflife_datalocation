@@ -3,10 +3,10 @@
     nodes:
       - name: node
         label: ubuntu-bionic
-    groups:
-      - name: emea-vars
-        nodes:
-         - node
+#    groups:
+#      - name: emea-vars
+#        nodes:
+#         - node
          
 - nodeset:
     name: nafta-node
@@ -50,8 +50,8 @@
     check_emea:
       jobs:
         - demomavenbuildjob:
-            group-vars:
-               emea-vars:
+            host-vars:
+               node:
                  myname: "juhi"
  #             emea_jfrog: "http://172.31.27.120:9081"
             nodeset: emea-node
