@@ -26,6 +26,7 @@
     - name: Push artifacts to jfrog repository
       uri:
         url: http://172.31.27.120:9081/artifactory/generic-local/gameoflife.war
+        when: zuul_location in emea
         validate_certs: no
         method: PUT
         headers:
