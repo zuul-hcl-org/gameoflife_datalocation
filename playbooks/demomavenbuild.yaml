@@ -2,6 +2,10 @@
   tasks:
     - debug:
         msg: "running for gameof life demo"
+    - debug: 
+         msg: "{{ emea_jfrog }}"
+    - debug:
+        msg: "{{ nafta_jfrog }}"
         
     - name: "Deleted the workspace dir before build"
       shell: |
@@ -28,5 +32,4 @@
           X-JFrog-Art-Api: AKCp5dK4un9rhNwegiiRP2GNEWijqzYYbxoawz6QzHVFuU5VWpGGXdzaTSV5eLEpoan64FpQW
         src: ~/work/gameoflife-web/target/gameoflife.war
         status_code: 201
-        remote_src: yes
-  
+        remote_src: yes  
