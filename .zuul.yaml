@@ -13,6 +13,12 @@
     nodes:
       - name: node2
         label: centos76
+        
+- nodeset:
+    name: gate-node
+    nodes:
+      - name: node3
+        label: centos76 
 
 - job:
     name: demomavenbuildjob
@@ -63,3 +69,10 @@
                 jfrog: "http://172.31.20.175:9082"
                 jfrog_api_token: "AKCp5dK4wtavETSJAiGFMbVRpe7YeGa8WdPzNmzqtvukpUnPdpschfY1RtrZXadQCpSHpAm4d"
             nodeset: nafta-node
+    merge:
+      jobs:
+        - noop
+    gate:
+      jobs:
+        - demomavenbuiljob:
+            nodeset: gate-node              
