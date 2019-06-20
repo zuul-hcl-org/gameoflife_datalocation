@@ -74,5 +74,5 @@
         - noop
     gate:
       jobs:
-        - demomavenbuiljob:
+        - demomavenbuildjob:
             nodeset: gate-node              
