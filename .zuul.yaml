@@ -13,13 +13,13 @@
     nodes:
       - name: node2
         label: centos76
-      - name: node3
-        label: ubuntu-node3
+#      - name: node3
+#        label: ubuntu-node3
         
 - nodeset:
     name: gate-node
     nodes:
-      - name: node3
+      - name: gate
         label: centos76 
 
 - job:
