@@ -39,22 +39,22 @@
 - project:
 #    vars:
 #      myname: "juhi"
-    #checklabel_emea:
-    #  jobs:
-    #   - checklabel_emea:
-    #       nodeset: emea-node
+    checklabel_emea:
+      jobs:
+       - checklabel_emea:
+           nodeset: emea-node
     checklabel_nafta:
       jobs:
        - checklabel_nafta:
            nodeset: nafta-node
-    #check_emea:
-    #  jobs:
-    #    - demomavenbuildjob:
-    #        host-vars:
-    #          node:
-    #            jfrog: "http://172.31.27.120:9081"
-    #            jfrog_api_token: "AKCp5dK4z1yg9pvS3QoLtzwpMUbTrN5edVNpyv9pHnThHBze7PoFGTEHMeJhcaT6tRXR8bt7Q"
-    #        nodeset: emea-node
+    check_emea:
+      jobs:
+        - demomavenbuildjob:
+            host-vars:
+              node:
+                jfrog: "http://172.31.27.120:9081"
+                jfrog_api_token: "AKCp5dK4z1yg9pvS3QoLtzwpMUbTrN5edVNpyv9pHnThHBze7PoFGTEHMeJhcaT6tRXR8bt7Q"
+            nodeset: emea-node
     check_nafta:
       jobs:
         - demomavenbuildjob:
