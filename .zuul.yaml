@@ -13,6 +13,8 @@
     nodes:
       - name: node2
         label: centos76
+      - name:node3
+        label: ubuntu-node
         
 - nodeset:
     name: gate-node
