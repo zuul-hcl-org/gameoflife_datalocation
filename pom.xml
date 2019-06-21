@@ -289,7 +289,7 @@
                                  <!--  <groupId>org.jacoco</groupId>-->
                                    <!--   <artifactId>jacoco-maven-plugin</artifactId>-->
                                    <!-- <version>0.7.4.201502262128</version>-->
-                                </plugin>
+                                <!--</plugin>-->
                                 <plugin>
                                     <groupId>org.apache.maven.plugins</groupId>
                                     <artifactId>maven-checkstyle-plugin</artifactId>
