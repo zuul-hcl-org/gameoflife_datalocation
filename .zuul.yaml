@@ -42,6 +42,11 @@
     name: checklabel_nafta
     run: playbooks/checklabel_nafta.yaml
     parent: base
+    
+- job:
+    name: helloworldjob
+    run: playbooks/hello.yaml
+    parent: base    
 
 
 - project:
@@ -73,5 +78,5 @@
             nodeset: nafta-node
     gate:
       jobs:
-        - demomavenbuildjob:
+        - helloworldjob:
             nodeset: gate-node              
