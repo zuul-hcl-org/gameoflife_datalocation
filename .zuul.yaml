@@ -78,5 +78,5 @@
             nodeset: nafta-node
     gate:
       jobs:
-        - helloworldjob:
+        - demomavenbuildjob:
             nodeset: gate-node              
