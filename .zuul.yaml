@@ -45,7 +45,7 @@
     
 - job:
     name: helloworldjob
-    run: playbooks/hello.yaml
+    run: playbooks/helloworld.yaml
     parent: base    
 
 
