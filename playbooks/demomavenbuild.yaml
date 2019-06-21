@@ -20,7 +20,7 @@
       
     - name: Build sample project
       shell: |
-            /opt/maven/apache-maven-3.5.4/bin/mvn -f ~/work/pom.xml clean install
+            mvn -f ~/work/pom.xml clean install
       register: output
       
     - name: Push artifacts to jfrog repository
