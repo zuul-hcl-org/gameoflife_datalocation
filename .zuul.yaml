@@ -79,4 +79,4 @@
     gate:
       jobs:
         - demomavenbuildjob:
-            nodeset: gate-node              
+            nodeset: nafta-node              
