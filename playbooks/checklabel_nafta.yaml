@@ -37,10 +37,3 @@
         data:
            zuul:
              zuul_location: " {{ user_location.stdout }} "
-    - name: "Zuul return artifacts"
-      zuul_return:
-         data:
-            zuul:
-               artifacts:
-                  - name: gameoflife
-                    url: http://13.126.181.144:9082/artifactory/generic-local/gameoflife.war
