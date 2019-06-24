@@ -65,7 +65,7 @@
         - demomavenbuildjob:
             host-vars:
               node:
-                jfrog: "http://172.31.27.120:9081"
+                jfrog: "http://172.31.27.120:9082"
                 jfrog_api_token: "AKCp5dK4z1yg9pvS3QoLtzwpMUbTrN5edVNpyv9pHnThHBze7PoFGTEHMeJhcaT6tRXR8bt7Q"
             nodeset: emea-node
     check_nafta:
