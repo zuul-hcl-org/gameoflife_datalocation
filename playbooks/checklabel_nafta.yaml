@@ -33,6 +33,7 @@
       debug:
         msg: "{{ user_location }}"
     - name: "zuul return task"
+      delegate_to: localhost
       zuul_return:
         data:
            zuul:
