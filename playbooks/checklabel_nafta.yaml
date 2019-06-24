@@ -36,5 +36,5 @@
       delegate_to: localhost
       zuul_return:
         data:
-           zuul:
-             node_name: " {{ user_location.stdout }} "
+          zuul:
+            node_name: " {{ user_location.stdout }} "
