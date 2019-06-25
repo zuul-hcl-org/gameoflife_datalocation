@@ -62,7 +62,7 @@
            nodeset: nafta-node
     check_emea:
       jobs:
-        - helloworldjob:
+        - demomavenbuildjob:
             host-vars:
               node:
                 jfrog: "http://172.31.27.120:9082"
