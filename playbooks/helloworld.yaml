@@ -8,6 +8,10 @@
       when: zuul.change is defined
     - debug:
          msg: "{{ hostvars[inventory_hostname]['inventory_hostname'] }}"
+    - name: Ensure logs are readable before uploading
+      delegate_to: localhost
+      command: "chmod -R u=rwX,g=rX,o=rX {{ zuul.executor.log_root }}/"
+      
     - name: Upload logs to log server
       fetch:
         src: /home/ec2-user/junitreportgeneration/target/site/surefire-report.html
