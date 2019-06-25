@@ -1,7 +1,7 @@
 - hosts: all
   tasks:
     - debug:
-        msg: "{{ zuul.change }}"
+        msg: "{{ zuul.executor.log_root }}"
       when: zuul.change is defined
     - debug:
         msg: "{{ zuul.change[-2:] }}/{{ zuul.change }}/{{ zuul.patchset }}/{{ zuul.pipeline }}/{{ zuul.job }}/{{ zuul.build[:7] }}"
