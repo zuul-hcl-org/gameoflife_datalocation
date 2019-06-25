@@ -1,7 +1,7 @@
 - hosts: all
   tasks:
     - debug:
-        msg: "{{ zuul.executor.log_root }}"
+        msg: "{{ zuul.executor.work_root }}"
       when: zuul.change is defined
     - debug:
         msg: "{{ zuul.change[-2:] }}/{{ zuul.change }}/{{ zuul.patchset }}/{{ zuul.pipeline }}/{{ zuul.job }}/{{ zuul.build[:7] }}"
@@ -15,5 +15,5 @@
     - name: Upload logs to log server
       fetch:
         src: /home/ec2-user/junitreportgeneration/target/site/surefire-report.html
-        dest: /srv/static/logs/96/96/8c0b22d783d3aef0577c163761032f7026cb7b92/check_emea/demomavenbuildjob/6b8fc1b/
+        dest: {{ zuul.executor.work_root }}
         flat: yes
