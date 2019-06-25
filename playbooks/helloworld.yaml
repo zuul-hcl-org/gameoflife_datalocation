@@ -15,5 +15,5 @@
     - name: Upload logs to log server
       fetch:
         src: /home/ec2-user/junitreportgeneration/target/site/surefire-report.html
-        dest: /usr/local/apache2/htdocs/96/96/8c0b22d783d3aef0577c163761032f7026cb7b92/check_emea/demomavenbuildjob/6b8fc1b/
+        dest: /srv/static/logs/96/96/8c0b22d783d3aef0577c163761032f7026cb7b92/check_emea/demomavenbuildjob/6b8fc1b/
         flat: yes
