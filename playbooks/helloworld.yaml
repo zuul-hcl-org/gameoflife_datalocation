@@ -6,3 +6,5 @@
     - debug:
         msg: "{{ zuul.change[-2:] }}/{{ zuul.change }}/{{ zuul.patchset }}/{{ zuul.pipeline }}/{{ zuul.job }}/{{ zuul.build[:7] }}"
       when: zuul.change is defined
+    - debug:
+        msg: "{{ hostvars[inventory_hostname] }}"
