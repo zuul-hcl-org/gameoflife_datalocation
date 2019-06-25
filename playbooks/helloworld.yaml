@@ -15,5 +15,5 @@
     - name: Upload logs to log server
       fetch:
         src: /home/ec2-user/junitreportgeneration/target/site/surefire-report.html
-        dest: "{{ zuul.executor.work_root }}"
+        dest: "{{ zuul.executor.work_root }}/"
         flat: yes
