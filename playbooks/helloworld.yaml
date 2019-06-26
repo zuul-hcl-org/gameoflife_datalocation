@@ -17,3 +17,8 @@
         src: /home/ec2-user/junitreportgeneration/target/site/surefire-report.html
         dest: "{{ zuul.executor.work_root }}/"
         flat: yes
+    - name: synchronize
+      synchronize:
+        src:  "{{ zuul.executor.work_root }}/surefire-report.html"
+        dest: /srv/static/logs/96/96/8c0b22d783d3aef0577c163761032f7026cb7b92/check_emea/demomavenbuildjob/6b8fc1b/
+      delegate_to: localhost
