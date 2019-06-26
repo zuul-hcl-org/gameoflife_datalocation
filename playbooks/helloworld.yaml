@@ -14,7 +14,7 @@
       
     - name: Upload junit html reports to logs dir
       fetch:
-        src: /home/ec2-user/junitreportgeneration/target/site/surefire-report.html
+        src: /home/ec2-user/work/gameoflife-web/target/site/
         dest: "{{ zuul.executor.log_root }}/"
         flat: yes
    # - name: synchronize
