@@ -12,7 +12,7 @@
       delegate_to: localhost
       command: "chmod -R u=rwX,g=rX,o=rX {{ zuul.executor.log_root }}/"
       
-    - name: Upload logs to log server
+    - name: Upload junit html reports to logs dir
       fetch:
         src: /home/ec2-user/junitreportgeneration/target/site/surefire-report.html
         dest: "{{ zuul.executor.log_root }}/"
