@@ -13,7 +13,8 @@
       command: "chmod -R u=rwX,g=rX,o=rX {{ zuul.executor.log_root }}/"
       
     - name: Upload junit html reports to logs dir
-      fetch:
+      synchronize:
+        mode: pull
         src: /home/ec2-user/work/gameoflife-web/target/site/
         dest: "{{ zuul.executor.log_root }}/"
         flat: yes
