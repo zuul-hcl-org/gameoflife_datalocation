@@ -17,7 +17,6 @@
         mode: pull
         src: /home/ec2-user/work/gameoflife-web/target/site/
         dest: "{{ zuul.executor.log_root }}/"
-        flat: yes
    # - name: synchronize
    #   delegate_to: localhost
    #   copy:
