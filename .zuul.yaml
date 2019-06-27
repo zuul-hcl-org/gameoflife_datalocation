@@ -1,7 +1,7 @@
 - nodeset:
     name: emea-node
     nodes:
-      - name: centos1
+      - name: centosaws
         label: centos1
 #    groups:
 #      - name: emea-vars
