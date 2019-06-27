@@ -1,8 +1,8 @@
 - nodeset:
     name: emea-node
     nodes:
-      - name: node
-        label: ubuntu-bionic
+      - name: centos1
+        label: centos1
 #    groups:
 #      - name: emea-vars
 #        nodes:
