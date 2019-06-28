@@ -46,7 +46,9 @@
 - job:
     name: helloworldjob
     run: playbooks/helloworld.yaml
-    parent: base    
+    parent: base
+    irrelevant-files:
+      - ^playbooks/.*$
 
 
 - project:
