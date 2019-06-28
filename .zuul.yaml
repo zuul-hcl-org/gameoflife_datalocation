@@ -26,6 +26,8 @@
     name: demomavenbuildjob
     run: playbooks/demomavenbuild.yaml
     parent: base
+    irrelevant-files:
+      - ^playbooks/.*$
 #    group-vars:
 #      emea-vars:
 #        myname: "juhi"
@@ -37,11 +39,15 @@
     name: checklabel_emea
     run: playbooks/checklabel_emea.yaml
     parent: base
+    irrelevant-files:
+      - ^playbooks/.*$
     
 - job:
     name: checklabel_nafta
     run: playbooks/checklabel_nafta.yaml
     parent: base
+    irrelevant-files:
+      - ^playbooks/.*$
     
 - job:
     name: helloworldjob
