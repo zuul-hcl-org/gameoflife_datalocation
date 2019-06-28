@@ -53,8 +53,8 @@
       - ^.zuul.yaml$
     
 - job:
-    name: helloworldjob
-    run: playbooks/helloworld.yaml
+    name: runsparkjob
+    run: playbooks/runsparkjob.yaml
     parent: base
     irrelevant-files:
       - ^playbooks/.*$
@@ -82,7 +82,7 @@
             nodeset: emea-node
     check_nafta:
       jobs:
-        - helloworldjob:
+        - runsparkjob:
             host-vars: 
               node2:
                 jfrog: "http://172.31.20.175:9082"
