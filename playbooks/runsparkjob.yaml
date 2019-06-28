@@ -1,0 +1,7 @@
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: "Run the Sample spark application"
+      shell: |
+            ~/./spark_job.sh
+      register: spark_output
