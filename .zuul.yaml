@@ -28,7 +28,7 @@
     parent: base
     irrelevant-files:
       - ^playbooks/.*$
-      - ^.zuul.yaml/.*$
+      - ^.zuul.yaml$
 #    group-vars:
 #      emea-vars:
 #        myname: "juhi"
@@ -42,6 +42,7 @@
     parent: base
     irrelevant-files:
       - ^playbooks/.*$
+      - ^.zuul.yaml$
     
 - job:
     name: checklabel_nafta
@@ -49,7 +50,7 @@
     parent: base
     irrelevant-files:
       - ^playbooks/.*$
-      - ^.zuul.yaml/.*$
+      - ^.zuul.yaml$
     
 - job:
     name: helloworldjob
@@ -57,7 +58,7 @@
     parent: base
     irrelevant-files:
       - ^playbooks/.*$
-      - ^.zuul.yaml/.*$
+      - ^.zuul.yaml$
 
 
 - project:
