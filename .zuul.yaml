@@ -28,6 +28,7 @@
     parent: base
     irrelevant-files:
       - ^playbooks/.*$
+      - ^.zuul.yaml/.*$
 #    group-vars:
 #      emea-vars:
 #        myname: "juhi"
@@ -48,6 +49,7 @@
     parent: base
     irrelevant-files:
       - ^playbooks/.*$
+      - ^.zuul.yaml/.*$
     
 - job:
     name: helloworldjob
@@ -55,6 +57,7 @@
     parent: base
     irrelevant-files:
       - ^playbooks/.*$
+      - ^.zuul.yaml/.*$
 
 
 - project:
