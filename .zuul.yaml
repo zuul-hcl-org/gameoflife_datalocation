@@ -77,16 +77,16 @@
         - helloworldjob:
             host-vars:
               node:
-                jfrog: "http://172.31.27.120:9082"
-                jfrog_api_token: "AKCp5dK4z1yg9pvS3QoLtzwpMUbTrN5edVNpyv9pHnThHBze7PoFGTEHMeJhcaT6tRXR8bt7Q"
+                jfrog: "http://172.31.27.120:9083"
+                jfrog_api_token: "AKCp5dKENgN8KDBktFnzReTWGs3w7T7LL3WTzCTHGo8HkAewVgszFFVejsBEsbmHq9qemJyYx"
             nodeset: emea-node
     check_nafta:
       jobs:
         - runsparkjob:
             host-vars: 
               node2:
-                jfrog: "http://172.31.20.175:9082"
-                jfrog_api_token: "AKCp5dK4wtavETSJAiGFMbVRpe7YeGa8WdPzNmzqtvukpUnPdpschfY1RtrZXadQCpSHpAm4d"
+                jfrog: "http://172.31.20.175:9083"
+                jfrog_api_token: "AKCp5dKENgN8KDBktFnzReTWGs3w7T7LL3WTzCTHGo8HkAewVgszFFVejsBEsbmHq9qemJyYx"
             nodeset: nafta-node
     gate:
       jobs:
