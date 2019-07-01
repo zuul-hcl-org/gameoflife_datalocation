@@ -16,8 +16,8 @@
       
     - name: Build sample project and junit reports 
       shell: |
-            mvn -f ~/work/pom.xml clean install
-            mvn -f ~/work/pom.xml surefire-report:report
+            mvn -f ~/work/pom.xml clean install -s ~/.m2/settings.xml
+            mvn -f ~/work/pom.xml surefire-report:report -s ~/.m2/settings.xml
       register: build_status
       
     - name: Push artifacts to jfrog repository
