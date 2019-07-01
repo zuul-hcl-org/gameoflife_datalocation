@@ -1,8 +1,8 @@
 - nodeset:
     name: emea-node
     nodes:
-      - name: node2
-        label: centos76
+      - name: node1
+        label: ubuntu-bionic
 #    groups:
 #      - name: emea-vars
 #        nodes:
@@ -11,8 +11,8 @@
 - nodeset:
     name: nafta-node
     nodes:
-      - name: centosaws
-        label: centos1
+      - name: node2
+        label: centos76
 #      - name: node3
 #        label: ubuntu-node3
         
@@ -82,7 +82,7 @@
             nodeset: emea-node
     check_nafta:
       jobs:
-        - runsparkjob:
+        - helloworldjob:
             host-vars: 
               node2:
                 jfrog: "http://172.31.20.175:9082"
