@@ -54,7 +54,7 @@
       jobs:
         - gameoflifebuild:
             host-vars:
-              node:
+              node1:
                 jfrog: "http://172.31.27.120:9083"
                 jfrog_api_token: "AKCp5dKENgN8KDBktFnzReTWGs3w7T7LL3WTzCTHGo8HkAewVgszFFVejsBEsbmHq9qemJyYx"
             nodeset: emea-node
@@ -64,7 +64,7 @@
             host-vars: 
               node2:
                 jfrog: "http://172.31.20.175:9083"
-                jfrog_api_token: "AKCp5dK4wtavETSJAiGFMbVRpe7YeGa8WdPzNmzqtvukpUnPdpschfY1RtrZXadQCpSHpAm4d"
+                jfrog_api_token: "AKCp5dKPSC8JkmgdCJ1SyqE3gtXEeyRYdQ2dTpE7oooHmgWW9WuKKBPrDtrfjzPfa9PMX7LSP"
             nodeset: nafta-node
     gate:
       jobs:
@@ -72,5 +72,5 @@
             host-vars: 
               node2:
                 jfrog: "http://172.31.20.175:9083"
-                jfrog_api_token: "AKCp5dK4wtavETSJAiGFMbVRpe7YeGa8WdPzNmzqtvukpUnPdpschfY1RtrZXadQCpSHpAm4d"
+                jfrog_api_token: "AKCp5dKPSC8JkmgdCJ1SyqE3gtXEeyRYdQ2dTpE7oooHmgWW9WuKKBPrDtrfjzPfa9PMX7LSP"
             nodeset: nafta-node              
