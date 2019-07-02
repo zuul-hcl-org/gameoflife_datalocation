@@ -7,8 +7,8 @@
 - nodeset:
     name: nafta-node
     nodes:
-      - name: node2
-        label: centos76
+      - name: centosaws
+        label: centos1
         
 - nodeset:
     name: gate-node
