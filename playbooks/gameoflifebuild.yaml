@@ -39,3 +39,9 @@
         src: /home/ec2-user/work/gameoflife-web/target/site/
         dest: "{{ zuul.executor.log_root }}/"
       when: build_status is succeeded
+      
+    - name: deploy to tomcat server
+      shell: |
+             cp ~/work/gameoflife-web/target/gameoflife.war /home/ec2-user/volumes/tomcat
+             docker restart tomcat_tomcat_1
+      when: build_status is succeeded
