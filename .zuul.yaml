@@ -3,38 +3,18 @@
     nodes:
       - name: node1
         label: ubuntu-bionic
-#    groups:
-#      - name: emea-vars
-#        nodes:
-#         - node
-         
+        
 - nodeset:
     name: nafta-node
     nodes:
       - name: node2
         label: centos76
-#      - name: node3
-#        label: ubuntu-node3
         
 - nodeset:
     name: gate-node
     nodes:
       - name: gate
         label: centos76 
-
-- job:
-    name: demomavenbuildjob
-    run: playbooks/demomavenbuild.yaml
-    parent: base
-    irrelevant-files:
-      - ^playbooks/.*$
-      - ^.zuul.yaml$
-#    group-vars:
-#      emea-vars:
-#        myname: "juhi"
-#    vars:
-#      emea_jfrog: "http://172.31.27.120:9081"
-#      nafta_jfrog: "http://172.31.20.75:9082"
 
 - job:
     name: checklabel_emea
@@ -53,8 +33,8 @@
       - ^.zuul.yaml$
     
 - job:
-    name: runsparkjob
-    run: playbooks/runsparkjob.yaml
+    name: gameoflifebuild
+    run: playbooks/gameoflifebuild.yaml
     parent: base
     irrelevant-files:
       - ^playbooks/.*$
@@ -62,8 +42,6 @@
 
 
 - project:
-#    vars:
-#      myname: "juhi"
     checklabel_emea:
       jobs:
        - checklabel_emea:
@@ -74,7 +52,7 @@
            nodeset: nafta-node
     check_emea:
       jobs:
-        - helloworldjob:
+        - gameoflifebuild:
             host-vars:
               node:
                 jfrog: "http://172.31.27.120:9083"
@@ -82,7 +60,7 @@
             nodeset: emea-node
     check_nafta:
       jobs:
-        - helloworldjob:
+        - gameoflifebuild:
             host-vars: 
               node2:
                 jfrog: "http://172.31.20.175:9082"
@@ -90,7 +68,7 @@
             nodeset: nafta-node
     gate:
       jobs:
-        - demomavenbuildjob:
+        - gameoflifebuild:
             host-vars: 
               node2:
                 jfrog: "http://172.31.20.175:9082"
