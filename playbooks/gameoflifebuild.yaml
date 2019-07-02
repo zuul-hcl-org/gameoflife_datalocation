@@ -2,6 +2,10 @@
   tasks:
     - debug:
         msg: "running for game of life demo"
+      
+    - shell: |
+            echo {{ zuul.change_url }} | cut -d '/' -f 7
+      register: pullid
  
     - name: "Deleted the workspace dir before build"
       shell: |
