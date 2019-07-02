@@ -26,7 +26,7 @@
       
     - name: Push artifacts to jfrog repository
       uri:
-        url: "{{ jfrog }}/artifactory/generic-local/gameoflife-{{ pullid }}.war"
+        url: "{{ jfrog }}/artifactory/generic-local/gameoflife-{{ pullid.stdout }}.war"
         #when: zuul_location in emea
         validate_certs: no
         method: PUT
