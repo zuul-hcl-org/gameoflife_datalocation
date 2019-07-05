@@ -1,8 +1,8 @@
 - hosts: all
   tasks:
-    - name: pull request dependent job
+    - name: text file reading
       debug:
-        msg: "In Check label emea job"
+        msg: "In user location jon"
 
     - name: checking the canonical name
       debug:
