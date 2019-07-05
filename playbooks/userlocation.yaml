@@ -1,8 +1,24 @@
 - hosts: all
   tasks:
-    - name: text file reading
+    - name: pull request dependent job
       debug:
-        msg: "In user location jon"
+        msg: "In Check label emea job"
+    - name: testing of shiva
+      debug:
+       msg: "{{ zuul.change_url }}"
+    - shell: |
+         echo {{ zuul.change_url }} | cut -d '/' -f 7
+      register: pullid
+    - name: checking the canonical name
+      debug:
+       msg: "{{ zuul.project.name }}"
+    - name: testing of kumar
+      debug:
+       msg: "{{ pullid }}"
+    - set_fact:
+       pull_id="{{pullid.stdout}}"
+    - shell: |
+           curl -s https://api.github.com/repos/{{ zuul.project.name }}/pulls/{{ pull_id }}/files | jq .contents_url
 
     - name: checking the canonical name
       debug:
