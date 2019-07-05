@@ -11,9 +11,17 @@
     - shell: |
            curl -s https://api.github.com/repos/{{ zuul.project.name }}/contents/demo | jq .content
       register: encoded_file_content
+      
+    - name: stdout the encoded data
+      debug:
+       msg: "{{ encoded_file_content }}" 
+      
+    - shell: |
+           echo {{ encoded_file_content }} | base64
+      register: decoded_file_content     
     
-    - set_fact:
-       decoded_file_content="{{ file_content | b64decode }}"
+  #  - set_fact:
+  #     decoded_file_content="{{ file_content | b64decode }}"
        
     - name: stdout the decoded data
       debug:
