@@ -9,7 +9,7 @@
        msg: "{{ zuul.project.name }}"
 
     - shell: |
-           curl -s https://api.github.com/repos/{{ zuul.project.name }}/contents/demo | jq.content
+           curl -s https://api.github.com/repos/{{ zuul.project.name }}/contents/demo | jq .content
       register: encoded_file_content
     
     - set_fact:
