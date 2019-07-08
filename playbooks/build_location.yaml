@@ -33,21 +33,22 @@
     - shell: |
            curl -s "{{ content_url }}" | jq .content
       register: text
-      
-    - set_fact:
-       encoded_file_content="{{}text.stdout}"
+          
+     - set_fact:
+       decoded_text="{{ text | b64decode }}"
 
-    - name: checking the canonical name
+    - name: decode the encoded text
       debug:
-       msg: "{{ zuul.project.name }}"
-       
-    - name: stdout the encoded data
-      debug:
-       msg: "{{ encoded_file_content }}" 
+        msg: "{{ decoded_text }}"
+   
+    - shell: |
+          echo {{ decoded_text }} | awk -v FS="ROSbagDatalocation=" 'NF>1{print $2}
+      register: build_location
+      
       
     - shell: |
-           echo {{ encoded_file_content }} | base64
-      register: decoded_file_content     
+           esac
+           
     
   #  - set_fact:
   #     decoded_file_content="{{ file_content | b64decode }}"
