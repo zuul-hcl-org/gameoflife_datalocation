@@ -45,9 +45,14 @@
           echo {{ decoded_text }} | awk -v FS="ROSbagDatalocation=" 'NF>1{print $2}
       register: build_location
       
+    - name: stdout build location
+      debug:
+       msg: "{{ build_location }}"
       
-    - shell: |
-           esac
+      
+   # - shell: |
+           
+    #       if 
            
     
   #  - set_fact:
