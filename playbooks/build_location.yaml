@@ -3,31 +3,44 @@
     - name: pull request dependent job
       debug:
         msg: "In Check label emea job"
+        
     - name: testing of shiva
       debug:
        msg: "{{ zuul.change_url }}"
+       
     - shell: |
          echo {{ zuul.change_url }} | cut -d '/' -f 7
       register: pullid
+      
     - name: checking the canonical name
       debug:
        msg: "{{ zuul.project.name }}"
+       
     - name: testing of kumar
       debug:
        msg: "{{ pullid }}"
+       
     - set_fact:
        pull_id="{{pullid.stdout}}"
+       
     - shell: |
            curl -s https://api.github.com/repos/{{ zuul.project.name }}/pulls/{{ pull_id }}/files | jq .contents_url
+      register: url
+      
+    - set_fact:
+       content_url="{{url.stdout}}"
+      
+    - shell: |
+           curl -s "{{ content_url }}" | jq .content
+      register: text
+      
+    - set_fact:
+       encoded_file_content="{{}text.stdout}"
 
     - name: checking the canonical name
       debug:
        msg: "{{ zuul.project.name }}"
-
-    - shell: |
-           curl -s https://api.github.com/repos/{{ zuul.project.name }}/contents/demo | jq .content
-      register: encoded_file_content
-      
+       
     - name: stdout the encoded data
       debug:
        msg: "{{ encoded_file_content }}" 
