@@ -42,7 +42,7 @@
 
 - job:
    name: buildlocationjob
-   run: playboos/build_location.yaml
+   run: playbooks/build_location.yaml
    parent: base
 
 - project:
