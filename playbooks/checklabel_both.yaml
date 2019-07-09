@@ -36,7 +36,7 @@
 
     - name: print content  url
       debug:
-       msg: "{{ content_url }}"
+       msg: "{{ content1_url }}"
 
     - name: get the location in the file
       shell: |
