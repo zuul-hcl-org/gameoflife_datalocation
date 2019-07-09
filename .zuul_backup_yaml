@@ -40,8 +40,15 @@
       - ^playbooks/.*$
       - ^.zuul.yaml$
 
+- job:
+   name: buildlocationjob
+   run: playboos/build_location.yaml
+   parent: base
 
 - project:
+    checklabel_both:
+      jobs: buildlocationjob
+      
     checklabel_emea:
       jobs:
        - checklabel_emea:
