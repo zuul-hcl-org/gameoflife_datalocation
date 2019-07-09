@@ -2,37 +2,50 @@
   tasks:
     - name: pull request dependent job
       debug:
-        msg: "In Check label emea job"
-    - name: testing of shiva
+        msg: "In Check label emea and nafta job"
+    - name: getting the pull id of pull request
       debug:
        msg: "{{ zuul.change_url }}"
     - shell: |
          echo {{ zuul.change_url }} | cut -d '/' -f 7
       register: pullid
-    - name: checking the canonical name
+    - name: getting the project name of pull request
       debug:
        msg: "{{ zuul.project.name }}"
-    - name: testing of kumar
+    - name: display pull id
       debug:
        msg: "{{ pullid }}"
     - set_fact:
        pull_id="{{pullid.stdout}}"
     - shell: |
-           curl -s https://api.github.com/repos/{{ zuul.project.name }}/pulls/{{ pull_id }} | jq .user.login
-      register: user
-    - name: pull requested user
-      debug:
-       msg: "{{ user }}"
+           curl -s https://api.github.com/repos/{{ zuul.project.name }}/pulls/{{ pull_id }}/files | jq '.[] | select(.filename=="build_location.json") | .contents_url'
+      register: url
+      args:
+        warn: false
     - set_fact:
-       user_id="{{user.stdout}}"
+       content_url="{{url.stdout}}"
+    - debug:
+       msg: "{{ content_url }}"
+
     - shell: |
-           curl -s https://api.github.com/users/{{ user_id }} | jq .location
-      register: user_location
-      failed_when: '"emea" and "nafta" in user_location.stdout'
-    - name: pull requested user location
+           curl -s "{{ content_url }}" | jq .download_url
+      register: content_output
+
+    - set_fact:
+       content1_url="{{content_output.stdout}}"
+
+    - name: print content  url
       debug:
-       msg: "{{ user_location }}"
-    - name: "zuul return task"
-      zuul_return:
-        data:
-          zuul_location: " {{ user_location }} "
+       msg: "{{ content_url }}"
+
+    - name: get the location in the file
+      shell: |
+           curl -s "{{ content1_url }}" |grep -i ROSbagDatalocation | cut -d "=" -f 2
+      register: name
+      failed_when: '"emea" and "nafta" not in user_location.stdout'
+    - set_fact:
+       location="{{name.stdout}}"
+
+    - name: debug location in file
+      debug:
+       msg: "{{ location }}"
