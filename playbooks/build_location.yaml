@@ -42,7 +42,7 @@
       shell: |
            curl -s "{{ content1_url }}" |grep -i ROSbagDatalocation | cut -d "=" -f 2
       register: name
-      failed_when: '"emea" and "nafta" not in user_location.stdout'
+      failed_when: '"both" not in user_location.stdout'
     - set_fact:
        location="{{name.stdout}}"
 
