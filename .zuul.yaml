@@ -46,9 +46,9 @@
    parent: base
 
 - project:
-    checklabel_both:
-      jobs: buildlocationjob
-      
+    jobs:
+     - buildlocationjob:
+         nodeset: emea-node            
     checklabel_emea:
       jobs:
        - checklabel_emea:
