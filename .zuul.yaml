@@ -13,6 +13,12 @@
         label: centos76
         
 - nodeset:
+    name: emea-node
+    nodes:
+      - name: node1
+        label: ubuntu-bionic        
+        
+- nodeset:
     name: gate-node
     nodes:
       - name: gate
