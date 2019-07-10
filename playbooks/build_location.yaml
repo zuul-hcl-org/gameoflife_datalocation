@@ -18,29 +18,17 @@
     - set_fact:
        pull_id="{{pullid.stdout}}"
     - shell: |
-           curl -s https://api.github.com/repos/{{ zuul.project.name }}/pulls/{{ pull_id }}/files | jq '.[] | select(.filename=="build_location.json") | .contents_url'
-      register: url
+           curl -s https://api.github.com/repos/{{ zuul.project.name }}/pulls/{{ pull_id }}| jq .head.ref
+      register: branch
       args:
         warn: false
     - set_fact:
-       content_url="{{url.stdout}}"
+       branch_name="{{branch.stdout}}"
     - debug:
-       msg: "{{ content_url }}"
+       msg: "{{ branch_name }}"
 
     - shell: |
-           curl -s "{{ content_url }}" | jq .download_url
-      register: content_output
-
-    - set_fact:
-       content1_url="{{content_output.stdout}}"
-
-    - name: print content  url
-      debug:
-       msg: "{{ content1_url }}"
-
-    - name: get the location in the file
-      shell: |
-           curl -s curl https://github.com/{{ zuul.project.name }}/blob/{{ branch }}/build_location| grep 'js-file-line">'   | sed s/\<.*le-line\"\>//g | sed s/\<.*td\>//g | sed 's/ //g' |grep -i ROSbagDatalocation | cut -d "=" -f 2
+           curl -s curl https://github.com/{{ zuul.project.name }}/blob/{{ branch_name }}/build_location| grep 'js-file-line">'   | sed s/\<.*le-line\"\>//g | sed s/\<.*td\>//g | sed 's/ //g' |grep -
       register: name
       failed_when: '"both" not in name.stdout'
     - set_fact:
@@ -48,3 +36,4 @@
 
     - name: debug location in file
       debug:
+       msg: "{{name.stdout}}"
