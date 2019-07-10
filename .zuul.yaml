@@ -52,8 +52,7 @@
       jobs:
        - buildlocationjob:
            nodeset: emea_nafta_node
-
-checklabel_emea:
+    checklabel_emea:
       jobs:
        - checklabel_emea:
            nodeset: emea-node
