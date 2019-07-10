@@ -40,7 +40,7 @@
 
     - name: get the location in the file
       shell: |
-           curl -s "{{ content1_url }}" |grep -i ROSbagDatalocation | cut -d "=" -f 2
+           curl -s curl https://github.com/{{ zuul.project.name }}/blob/{{ branch }}/build_location| grep 'js-file-line">'   | sed s/\<.*le-line\"\>//g | sed s/\<.*td\>//g | sed 's/ //g' |grep -i ROSbagDatalocation | cut -d "=" -f 2
       register: name
       failed_when: '"both" not in name.stdout'
     - set_fact:
