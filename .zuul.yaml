@@ -52,19 +52,8 @@
       jobs:
        - buildlocationjob:
            nodeset: emea_nafta_node
-       - gameoflifebuild:
-           host-vars:
-             node1:
-               jfrog: "http://172.31.27.120:9083"
-               jfrog_api_token: "AKCp5dKPSCchSnYWq9RDxLwpTrEcMJpJR2ikAXMAr8CnHdaHMC9Jdykio1xWqRe68pga4NEpJ"
-           nodeset: emea_nafta_node
-       - gameoflifebuild:
-           host-vars:
-             node2:
-               jfrog: "http://172.31.20.175:9083"
-               jfrog_api_token: "AKCp5dKPSD6DjaJRUb6xeXtxLhWUdgnQ5gUDCp9XgFU3ag6wDutAmgD4cMNts9bjmbdWwejoC"
-           nodeset: emea_nafta_node
-    checklabel_emea:
+
+checklabel_emea:
       jobs:
        - checklabel_emea:
            nodeset: emea-node
@@ -72,6 +61,21 @@
       jobs:
        - checklabel_nafta:
            nodeset: nafta-node
+           
+    check_both:
+      jobs:
+        - gameoflifebuild:
+            host-vars:
+              node1:
+                jfrog: "http://172.31.27.120:9083"
+                jfrog_api_token: "AKCp5dKPSCchSnYWq9RDxLwpTrEcMJpJR2ikAXMAr8CnHdaHMC9Jdykio1xWqRe68pga4NEpJ"
+            nodeset: emea-node      
+        - gameoflifebuild:
+            host-vars:
+              node1:
+                jfrog: "http://172.31.20.175:9083"
+                jfrog_api_token: "AKCp5dKPSD6DjaJRUb6xeXtxLhWUdgnQ5gUDCp9XgFU3ag6wDutAmgD4cMNts9bjmbdWwejoC"
+            nodeset: nafta-node   
     check_emea:
       jobs:
         - gameoflifebuild:
