@@ -25,7 +25,7 @@
     block:
      - name: test14
        shell: |
-          curl -s https://api.github.com/repos/rshiva777/shivahello/pulls/49 | jq .head.ref
+          curl -s https://api.github.com/repos/{{ zuul.change_url }}/pulls/{{ pull_id }} | jq .head.ref
        register: branch
        args:
          warn: false
