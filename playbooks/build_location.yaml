@@ -1,0 +1,50 @@
+- hosts: all
+  tasks:
+    - name: pull request dependent job
+      debug:
+        msg: "In Check label emea and nafta job"
+    - name: getting the pull id of pull request
+      debug:
+       msg: "{{ zuul.change_url }}"
+    - shell: |
+         echo {{ zuul.change_url }} | cut -d '/' -f 7
+      register: pullid
+    - name: getting the project name of pull request
+      debug:
+       msg: "{{ zuul.project.name }}"
+    - name: display pull id
+      debug:
+       msg: "{{ pullid }}"
+    - set_fact:
+       pull_id="{{pullid.stdout}}"
+    - shell: |
+           curl -s https://api.github.com/repos/{{ zuul.project.name }}/pulls/{{ pull_id }}/files | jq '.[] | select(.filename=="build_location.json") | .contents_url'
+      register: url
+      args:
+        warn: false
+    - set_fact:
+       content_url="{{url.stdout}}"
+    - debug:
+       msg: "{{ content_url }}"
+
+    - shell: |
+           curl -s "{{ content_url }}" | jq .download_url
+      register: content_output
+
+    - set_fact:
+       content1_url="{{content_output.stdout}}"
+
+    - name: print content  url
+      debug:
+       msg: "{{ content1_url }}"
+
+    - name: get the location in the file
+      shell: |
+           curl -s "{{ content1_url }}" |grep -i ROSbagDatalocation | cut -d "=" -f 2
+      register: name
+      failed_when: '"both" not in name.stdout'
+    - set_fact:
+       location="{{name.stdout}}"
+
+    - name: debug location in file
+      debug:
