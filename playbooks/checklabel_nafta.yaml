@@ -18,10 +18,9 @@
   - set_fact:
      pull_id="{{pullid.stdout}}"
 
-  - name: Checking Region from the build location file
+  - name: Checking Region
     block:
-     - name: Get the branch name of the pull request
-       shell: |
+     - shell: |
           curl -s https://api.github.com/repos/{{ zuul.project.name }}/pulls/{{ pull_id }} | jq .head.ref
        register: branch
        args:
@@ -39,8 +38,7 @@
         location="{{name.stdout}}"
 
     rescue:
-     - name: Read the values of Regions from the build location file
-       shell: |
+     - shell: |
                curl -s curl https://github.com/{{ zuul.project.name }}/blob/{{ branch_name }}/build_location| grep 'js-file-line">'   | sed s/\<.*le-line\"\>//g | sed s/\<.*td\>//g | sed 's/ //g'|grep -i ROSbagDatalocation | cut -d "=" -f 2
        register: name1
      - set_fact:
