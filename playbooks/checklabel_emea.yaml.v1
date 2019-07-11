@@ -60,7 +60,7 @@
                  - shell: |
                                 curl -s https://api.github.com/users/rshiva777 | jq .location
                    register: user_location
-       when: '"both" and "nafta" not in   location1'
+       when: '"nafta" not in   location1'
      - shell: |
              echo "hi"
-       failed_when: '"both" and "nafta"  in  location1'
+       failed_when: '"nafta"  in  location1'
