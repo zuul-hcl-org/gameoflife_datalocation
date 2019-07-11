@@ -50,8 +50,8 @@
              docker restart tomcat_tomcat_1
       when: build_status is succeeded
       
-    - name: deploy to kubernetes
-      shell: |
-             cd ~/gameoflife
-             kubectl apply -f kubedeploy.yml
+#    - name: deploy to kubernetes
+#      shell: |
+#             cd ~/gameoflife
+#             kubectl apply -f kubedeploy.yml
                    
