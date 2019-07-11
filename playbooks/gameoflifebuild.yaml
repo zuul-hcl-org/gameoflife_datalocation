@@ -17,6 +17,7 @@
         repo: https://github.com/zuul-hcl-org/gameoflife.git
         dest: ~/work/
       when: clean_output is succeeded
+      become: true
       
     - name: Build sample project and junit reports 
       shell: |
