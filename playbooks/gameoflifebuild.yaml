@@ -9,15 +9,19 @@
  
     - name: "Deleted the workspace dir before build"
       shell: |
-            rm -rf ~/work
+           rm -rf ~/work
       register: clean_output
+      
+    - name: "Create the work dir" 
+      shell: |
+           mkdir ~/work          
       
     - name: Clone git repo
       git:
-        repo: https://github.com/zuul-hcl-org/gameoflife.git
+        repo: https://github.com/zuul-hcl-org/gameoflife_datalocation.git
         dest: ~/work/
       when: clean_output is succeeded
-      become: true
+      #become: true
       
     - name: Build sample project and junit reports 
       shell: |
