@@ -26,20 +26,28 @@
         label: centos76 
 
 - job:
-    name: checklabel_emea
-    run: playbooks/checklabel_emea.yaml
+    name: checklabelemea_datalocation
+    run: playbooks/buildlocation_emea.yaml
     parent: base
     irrelevant-files:
       - ^playbooks/.*$
       - ^.zuul.yaml$
     
 - job:
-    name: checklabel_nafta
-    run: playbooks/checklabel_nafta.yaml
+    name: checklabelnafta_datalocation
+    run: playbooks/buildlocation_nafta.yaml
     parent: base
     irrelevant-files:
       - ^playbooks/.*$
       - ^.zuul.yaml$
+      
+- job:
+    name: checklabel_both
+    run: playbooks/buildlocation_both.yaml
+    parent: base
+    irrelevant-files:
+      - ^playbooks/.*$
+      - ^.zuul.yaml$      
     
 - job:
     name: gameoflifebuild
@@ -50,14 +58,18 @@
       - ^.zuul.yaml$
 
 - project:
-    checklabel_emea:
+    checklabel_both:
       jobs:
-       - checklabel_emea:
+       - checklabel_both:
            nodeset: emea-node
-    checklabel_nafta:
+    checklabel_nafta_datalocation:
       jobs:
-       - checklabel_nafta:
+       - checklabelnafta_datalocation:
            nodeset: nafta-node      
+    checklabel_emea_datalocation:
+      jobs:
+       - checklabelemea_datalocation:
+           nodeset: nafta-node          
     check_emea:
       jobs:
         - gameoflifebuild:
