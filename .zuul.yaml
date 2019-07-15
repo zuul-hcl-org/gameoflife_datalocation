@@ -60,7 +60,7 @@
 - job:
     name: gameoflifebuild_image
     run: playbooks/gameoflifebuild_image.yml
-    parent: base
+    parent: gameoflifebuild
     irrelevant-files:
       - ^playbooks/.*$
       - ^.zuul.yaml$     
@@ -68,7 +68,7 @@
 - job:
     name: gameoflifebuild_deploy
     run: playbooks/gameoflifebuild_deploy.yml
-    parent: base
+    parent: gameoflifebuild
     irrelevant-files:
       - ^playbooks/.*$
       - ^.zuul.yaml$
