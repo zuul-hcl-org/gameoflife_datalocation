@@ -28,33 +28,25 @@
     name: checklabelemea_datalocation
     run: playbooks/buildlocation_emea.yaml
     parent: base
-    irrelevant-files:
-      - ^playbooks/.*$
-      - ^.zuul.yaml$
+    
     
 - job:
     name: checklabelnafta_datalocation
     run: playbooks/buildlocation_nafta.yaml
     parent: base
-    irrelevant-files:
-      - ^playbooks/.*$
-      - ^.zuul.yaml$
+    
       
 - job:
     name: checklabel_both
     run: playbooks/buildlocation_both.yaml
     parent: base
-    irrelevant-files:
-      - ^playbooks/.*$
-      - ^.zuul.yaml$      
+       
     
 - job:
     name: gameoflifebuild
     run: playbooks/gameoflifebuild.yml
     parent: base
-    irrelevant-files:
-      - ^playbooks/.*$
-      - ^.zuul.yaml$
+    
       
 - job:
     name: gameoflifebuild_image
@@ -68,9 +60,7 @@
     name: gameoflifebuild_deploy
     run: playbooks/gameoflifebuild_deploy.yml
     parent: base
-    irrelevant-files:
-      - ^playbooks/.*$
-      - ^.zuul.yaml$
+    
 
 - project:
     checklabel_both:
