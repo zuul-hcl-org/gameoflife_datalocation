@@ -82,7 +82,7 @@
             nodeset: emea-node            
         - buildimage:
             dependencies:
-              - gameoflifebuild
+              - buildcode
             host-vars:
               node1:
                 jfrog: "http://172.31.27.120:9083"
@@ -91,8 +91,8 @@
             nodeset: emea-node            
         - builddeploy:
             dependencies:
-              - gameoflifebuild
-              - gameoflifebuild_image
+              - buildcode
+              - buildimage
             host-vars:
               node1:
                 jfrog: "http://172.31.27.120:9083"
@@ -110,7 +110,7 @@
             nodeset: nafta-node
         - buildimage:
             dependencies:
-              - gameoflifebuild
+              - buildcode
             host-vars: 
               node2:
                 jfrog: "http://172.31.20.175:9083"
@@ -119,8 +119,8 @@
             nodeset: nafta-node
         - builddeploy:
             dependencies:
-              - gameoflifebuild
-              - gameoflifebuild_image
+              - buildcode
+              - buildimage
             host-vars:
               node2:
                 jfrog: "http://172.31.20.175:9083"
