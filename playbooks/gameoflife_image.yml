@@ -1,5 +1,9 @@
 - hosts: all
   tasks:
+    - shell: |
+           echo {{ zuul.change_url }} | cut -d '/' -f 7
+      register: pullid
+      
     - name: Pull the jar file 
       get_url:
         url: "{{ jfrog }}/artifactory/generic-local/gameoflife-{{ pullid.stdout }}.war"
@@ -25,7 +29,7 @@
     - name : build the docker image 
       shell: |
            cd /home/ec2-user/work
-           docker build -t {{ jfrog_docker }}/docker-local/tomcat:latest . 
+           docker build -t {{ jfrog_docker }}/docker-local/tomcat:{{ pullid.stdout }} . 
            
     - name: login to docker to push the images
       shell: |
@@ -34,7 +38,7 @@
            
     - name : push the docker images 
       shell: |
-           docker push {{ jfrog_docker }}/docker-local/tomcat:latest 
+           docker push {{ jfrog_docker }}/docker-local/tomcat:{{ pullid.stdout }} 
       when: login_status is succeeded         
       
 #    - name: deploy to kubernetes
