@@ -3,8 +3,8 @@
     - debug:
         msg: "running for game of life demo"
     
-    - debug:
-        msg: "{{ zuul.executor.work_root }}"
+#    - debug:
+#       msg: "{{ zuul.executor.work_root }}"
       
     - shell: |
             echo {{ zuul.change_url }} | cut -d '/' -f 7
