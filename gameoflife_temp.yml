@@ -1,0 +1,110 @@
+- hosts: all
+  tasks:
+    - debug:
+        msg: "running for game of life demo"
+    
+    - debug:
+        msg: "{{ zuul.executor.work_root }}"
+      
+    - shell: |
+            echo {{ zuul.change_url }} | cut -d '/' -f 7
+      register: pullid
+ 
+    - name: "Deleted the workspace dir before build"
+      shell: |
+            rm -rf ~/work
+      register: clean_output
+      
+    - name: "Create the work dir"
+      shell: |
+            mkdir ~/work
+      register: make_output  
+      
+    - name: Clone git repo
+      git:
+        repo: https://github.com/zuul-hcl-org/gameoflife.git
+        dest: ~/work/
+      when: make_output is succeeded
+#      become: true
+      
+    - name: Build sample project and junit reports 
+      shell: |
+            mvn -f ~/work/pom.xml clean install -s ~/.m2/settings.xml
+            mvn -f ~/work/pom.xml surefire-report:report -s ~/.m2/settings.xml
+      register: build_status
+      
+    - name: Push artifacts to jfrog repository
+      uri:
+        url: "{{ jfrog }}/artifactory/generic-local/gameoflife-{{ pullid.stdout }}.war"
+        #when: zuul_location in emea
+        validate_certs: no
+        method: PUT
+        headers:
+          X-JFrog-Art-Api: "{{ jfrog_api_token }}"
+        src: ~/work/gameoflife-web/target/gameoflife.war
+        status_code: 201
+        remote_src: yes
+      when: build_status is succeeded
+      
+    - name: Upload junit and jacoco reports to logs dir
+      synchronize:
+        mode: pull
+        src: /home/ec2-user/work/gameoflife-web/target/site/
+        dest: "{{ zuul.executor.log_root }}/"
+      when: build_status is succeeded
+      
+    - name: Pull the jar file 
+      get_url:
+        url: "{{ jfrog }}/artifactory/generic-local/gameoflife-{{ pullid.stdout }}.war"
+        dest: /home/ec2-user/work
+        
+   - name: Get the pipeline name in which job is being run
+     debug:
+       msg : "{{ zuul.pipeline }}"     
+        
+   - shell: |
+          echo {{ zuul.pipeline }} | cut -d '_' -f 2
+     register: location
+        
+    - set_fact:
+       data_location="{{location.stdout}}"
+                    
+    - name: build the docker file
+      shell: | 
+           echo "FROM ec2-13-126-181-144.ap-south-1.compute.amazonaws.com:9083/docker-local/tomcat:v1.2" > /home/ec2-user/work/Dockerfile
+           echo "COPY gameoflife-{{ pullid.stdout }}.war   /usr/local/tomcat/webapps/" >> /home/ec2-user/work/Dockerfile
+           echo "COPY /home/ec2-user/work/{{ zuul.project.short_name }}/{{ data_location }}_input/*.*   /usr/local/webapps" >> /home/ec2-user/work/Dockerfile
+            
+    - name : build the docker image 
+      shell: |
+           cd /home/ec2-user/work
+           docker build -t {{ jfrog_docker }}/docker-local/tomcat:latest . 
+           
+    - name: login to docker to push the images
+      shell: |
+           docker login -u admin -p password  {{ jfrog_docker }}
+      register: login_status
+           
+    - name : push the docker images 
+      shell: |
+           docker push {{ jfrog_docker }}/docker-local/tomcat:latest 
+      when: login_status is succeeded      
+      
+    - name: Modify the kubedeploy.yml file
+      replace:
+        path: /home/ec2-user/work/kubedeploy.yml
+        after: 'image: '
+        before: '/docker-local/tomcat:latest'
+        regexp: '^(.+)$'
+        replace: '{{ jfrog_docker }}'
+      
+    - name: deploy to kubernetes
+      shell: |
+           cd /home/ec2-user/work
+           kubectl apply -f kubedeploy.yml     
+      
+#    - name: deploy to kubernetes
+#      shell: |
+#             cd ~/gameoflife
+#             kubectl apply -f kubedeploy.yml
+                   
