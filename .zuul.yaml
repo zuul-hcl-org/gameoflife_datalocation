@@ -50,7 +50,7 @@
     
 - job:
     name: gameoflifebuild
-    run: playbooks/gameoflifebuild.yaml
+    run: playbooks/gameoflifebuild.yml
     parent: base
     irrelevant-files:
       - ^playbooks/.*$
