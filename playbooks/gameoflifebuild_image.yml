@@ -1,8 +1,8 @@
 - hosts: all
   tasks:
-    - shell: |
-           echo {{ zuul.change_url }} | cut -d '/' -f 7
-      register: pullid
+#    - shell: |
+#           echo {{ zuul.change_url }} | cut -d '/' -f 7
+#      register: pullid
       
     - name: Pull the jar file 
       get_url:
