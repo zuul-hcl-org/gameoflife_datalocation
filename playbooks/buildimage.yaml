@@ -24,7 +24,7 @@
       shell: | 
            echo "FROM ec2-13-126-181-144.ap-south-1.compute.amazonaws.com:9083/docker-local/tomcat:v1.2" > /home/ec2-user/work/Dockerfile
            echo "COPY gameoflife-{{ pullid.stdout }}.war   /usr/local/tomcat/webapps/" >> /home/ec2-user/work/Dockerfile
-           echo "COPY /home/ec2-user/work/{{ zuul.project.short_name }}/{{ data_location }}_input/   /usr/local/webapps/{{ data_location }}_input/" >> /home/ec2-user/work/Dockerfile
+           echo "ADD /home/ec2-user/work/{{ zuul.project.short_name }}/{{ data_location }}_input/settings.ini   /usr/local/webapps/" >> /home/ec2-user/work/Dockerfile
            echo "RUN ls -laR /usr/local/webapps/*" >> /home/ec2-user/work/Dockerfile
     - name : build the docker image 
       shell: |
