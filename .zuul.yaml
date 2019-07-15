@@ -56,6 +56,22 @@
     irrelevant-files:
       - ^playbooks/.*$
       - ^.zuul.yaml$
+      
+- job:
+    name: gameoflifebuild_image
+    run: playbooks/gameoflifebuild_image.yml
+    parent: base
+    irrelevant-files:
+      - ^playbooks/.*$
+      - ^.zuul.yaml$     
+
+- job:
+    name: gameoflifebuild_deploy
+    run: playbooks/gameoflifebuild_deploy.yml
+    parent: base
+    irrelevant-files:
+      - ^playbooks/.*$
+      - ^.zuul.yaml$
 
 - project:
     checklabel_both:
@@ -128,5 +144,3 @@
                 jfrog_api_token: "AKCp5dKPSD6DjaJRUb6xeXtxLhWUdgnQ5gUDCp9XgFU3ag6wDutAmgD4cMNts9bjmbdWwejoC"
                 jfrog_docker: "ec2-13-234-232-162.ap-south-1.compute.amazonaws.com:9083"
             nodeset: nafta-node
-              
-            
