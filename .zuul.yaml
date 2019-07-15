@@ -43,22 +43,22 @@
        
     
 - job:
-    name: gameoflifebuild
-    run: playbooks/gameoflifebuild.yml
+    name: buildcode
+    run: playbooks/buildcode.yaml
     parent: base
     
       
 - job:
-    name: gameoflifebuild_image
-    run: playbooks/gameoflifebuild_image.yml
+    name: buildimage
+    run: playbooks/buildimage.yaml
     parent: base       
     irrelevant-files:
       - ^playbooks/.*$
       - ^.zuul.yaml$     
 
 - job:
-    name: gameoflifebuild_deploy
-    run: playbooks/gameoflifebuild_deploy.yml
+    name: builddeploy
+    run: playbooks/builddeploy.yaml
     parent: base
     
 
@@ -77,7 +77,7 @@
            nodeset: nafta-node          
     check_emea:
       jobs:
-        - gameoflifebuild:
+        - buildcode:
             host-vars:
               node1:
                 jfrog: "http://172.31.27.120:9083"
@@ -85,7 +85,7 @@
                 jfrog_docker: "ec2-13-126-181-144.ap-south-1.compute.amazonaws.com:9083"
             nodeset: emea-node
             
-        - gameoflifebuild_image:
+        - buildimage:
             dependencies:
               - gameoflifebuild
             host-vars:
@@ -95,7 +95,7 @@
                 jfrog_docker: "ec2-13-126-181-144.ap-south-1.compute.amazonaws.com:9083"
             nodeset: emea-node
             
-        - gameoflifebuild_deploy:
+        - builddeploy:
             dependencies:
               - gameoflifebuild
               - gameoflifebuild_image
@@ -107,14 +107,14 @@
             nodeset: emea-node
     check_nafta:
       jobs:
-        - gameoflifebuild:
+        - buildcode:
             host-vars: 
               node2:
                 jfrog: "http://172.31.20.175:9083"
                 jfrog_api_token: "AKCp5dKPSD6DjaJRUb6xeXtxLhWUdgnQ5gUDCp9XgFU3ag6wDutAmgD4cMNts9bjmbdWwejoC"
                 jfrog_docker: "ec2-13-235-19-10.ap-south-1.compute.amazonaws.com:9083"
             nodeset: nafta-node
-        - gameoflifebuild_image:
+        - buildimage:
             dependencies:
               - gameoflifebuild
             host-vars: 
@@ -123,7 +123,7 @@
                 jfrog_api_token: "AKCp5dKPSD6DjaJRUb6xeXtxLhWUdgnQ5gUDCp9XgFU3ag6wDutAmgD4cMNts9bjmbdWwejoC"
                 jfrog_docker: "ec2-13-235-19-10.ap-south-1.compute.amazonaws.com:9083"
             nodeset: nafta-node
-        - gameoflife_deploy:
+        - builddeploy:
             dependencies:
               - gameoflifebuild
               - gameoflifebuild_image
