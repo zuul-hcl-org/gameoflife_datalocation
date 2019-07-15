@@ -6,12 +6,12 @@
         dest: /home/ec2-user/work
         
     - name: Get the pipeline name in which job is being run
-     debug:
-       msg : "{{ zuul.pipeline }}"     
+      debug:
+        msg : "{{ zuul.pipeline }}"     
         
     - shell: |
-          echo {{ zuul.pipeline }} | cut -d '_' -f 1
-     register: location
+           echo {{ zuul.pipeline }} | cut -d '_' -f 1
+      register: location
         
     - set_fact:
        data_location="{{location.stdout}}"
@@ -35,20 +35,7 @@
     - name : push the docker images 
       shell: |
            docker push {{ jfrog_docker }}/docker-local/tomcat:latest 
-      when: login_status is succeeded      
-      
-    - name: Modify the kubedeploy.yml file
-      replace:
-        path: /home/ec2-user/work/kubedeploy.yml
-        after: 'image: '
-        before: '/docker-local/tomcat:latest'
-        regexp: '^(.+)$'
-        replace: '{{ jfrog_docker }}'
-      
-    - name: deploy to kubernetes
-      shell: |
-           cd /home/ec2-user/work
-           kubectl apply -f kubedeploy.yml     
+      when: login_status is succeeded         
       
 #    - name: deploy to kubernetes
 #      shell: |
