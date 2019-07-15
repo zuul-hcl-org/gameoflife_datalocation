@@ -4,7 +4,7 @@
       replace:
         path: /home/ec2-user/work/kubedeploy.yml
         after: 'image: '
-        before: '/docker-local/tomcat:latest'
+        before: '/docker-local/'
         regexp: '^(.+)$'
         replace: '{{ jfrog_docker }}'
       
