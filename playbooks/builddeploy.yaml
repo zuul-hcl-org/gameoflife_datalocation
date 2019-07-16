@@ -7,7 +7,6 @@
     - name: Modify the kubedeploy.yml file
       replace:
         path: /home/ec2-user/work/kubedeploy.yml
-        efore: '/docker-local/tomcat:latest'
         regexp: 'dummy.com/docker-local/tomcat:latest'
         replace: '{{ jfrog_docker }}/docker-local/tomcat:{{ pullid.stdout }}'
       
