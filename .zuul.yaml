@@ -111,7 +111,7 @@
             nodeset: emea-node
     check_nafta:
       jobs:
-        - buildvariable:
+        - buildvariables:
             nodeset: nafta-node
         - buildcode:
             host-vars: 
