@@ -63,9 +63,9 @@
        nafta_artifacts={{nafta_artifact_location.stdout}}    
        
     - zuul_return:
-        - data1:
+        - data:
             zuul_rosbag_location: "{{ location }}"
-        - data2:
+        - data:
             zuul_input_location_1: "{{ input_location_1 }}"
        
 #    - zuul_return:
