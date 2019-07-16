@@ -22,7 +22,7 @@
       
     - name: Clone git repo
       git:
-        repo: https://github.com/zuul-hcl-org/gameoflife.git
+        repo: https://github.com/zuul-hcl-org/gameoflife_datalocation.git
         dest: ~/work/
       when: make_output is succeeded
 #      become: true
