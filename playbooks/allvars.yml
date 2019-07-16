@@ -30,7 +30,7 @@
     - shell: |
            curl -s curl https://github.com/{{ zuul.project.name }}/blob/{{ branch_name }}/build_location| grep 'js-file-line">'   | sed s/\<.*le-line\"\>//g | sed s/\<.*td\>//g | sed 's/ //g'|grep -i ROSbagDatalocation | cut -d "=" -f 2 
       register: name
-      failed_when: '"both" not in name.stdout'
+      
     - set_fact:
        location="{{name.stdout}}"
        
@@ -62,4 +62,10 @@
     - set_fact:
        nafta_artifacts={{nafta_artifact_location.stdout}}    
        
-   
+   - zuul_return:
+      data:
+        - zuul_rosbag_location: {{ location }}
+        - zuul_input_location_1: {{ input_location_1 }}
+        - zuul_input_location_2: {{ input_location_2 }}
+        - zuul_emea_artifact_location: {{ emea_artifacts }}
+        - zuul_nafta_artifact_location: {{ nafta_artifacts }}
