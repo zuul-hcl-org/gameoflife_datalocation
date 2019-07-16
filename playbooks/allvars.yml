@@ -70,14 +70,14 @@
         data:
           zuul_input_location_1: "{{ input_location_1 }}"
           
-     - zuul_return:
-         data:     
-           zuul_input_location_2: "{{ input_location_2 }}" 
+    - zuul_return:
+        data:     
+          zuul_input_location_2: "{{ input_location_2 }}" 
      
-     - zuul_return:
-         data:     
-           zuul_emea_artifact_location: "{{ emea_artifacts }}"
+    - zuul_return:
+        data:     
+          zuul_emea_artifact_location: "{{ emea_artifacts }}"
            
-     - zuul_return:
-         data:     
-           zuul_nafta_artifact_location: "{{ nafta_artifacts }}" 
+    - zuul_return:
+        data:     
+          zuul_nafta_artifact_location: "{{ nafta_artifacts }}" 
