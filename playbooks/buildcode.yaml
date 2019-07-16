@@ -3,8 +3,8 @@
     - debug:
         msg: "running for game of life demo"
     
-    -debug:
-       msg: {{ zuul_rosbag_location }}
+    - debug:
+       msg: "{{ zuul_rosbag_location }}"
     
 #    - debug:
 #       msg: "{{ zuul.executor.work_root }}"
