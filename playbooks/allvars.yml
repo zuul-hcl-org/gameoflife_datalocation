@@ -48,8 +48,18 @@
     - set_fact:
        input_location_2={{inputdata_location.stdout}}    
        
-    - name: debug location in file
-      debug:
-       msg: "{{name.stdout}}"
+    - shell: |
+           curl -s curl https://github.com/{{ zuul.project.name }}/blob/{{ branch_name }}/build_location| grep 'js-file-line">'   | sed s/\<.*le-line\"\>//g | sed s/\<.*td\>//g | sed 's/ //g'|grep -i Emea_artifactlocation | cut -d "=" -f 2 
+      register: emea_artifact_location
+      
+    - set_fact:
+       emea_artifacts={{emea_artifact_location.stdout}}   
        
-    - name: Write all variables in a file   
+    - shell: |
+           curl -s curl https://github.com/{{ zuul.project.name }}/blob/{{ branch_name }}/build_location| grep 'js-file-line">'   | sed s/\<.*le-line\"\>//g | sed s/\<.*td\>//g | sed 's/ //g'|grep -i Nafta_artifactlocation | cut -d "=" -f 2 
+      register: nafta_artifact_location
+      
+    - set_fact:
+       nafta_artifacts={{nafta_artifact_location.stdout}}    
+       
+   
