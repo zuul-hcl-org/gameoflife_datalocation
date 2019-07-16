@@ -40,23 +40,29 @@
     name: checklabel_both
     run: playbooks/buildlocation_both.yaml
     parent: base
+    
+- job:
+    name: buildvariables
+    run: playbooks/allvars.yml
+    parent: base    
        
     
 - job:
     name: buildcode
     run: playbooks/buildcode.yaml
-    parent: base
+    parent: buildvariables
+    
     
       
 - job:
     name: buildimage
     run: playbooks/buildimage.yaml
-    parent: base       
+    parent: buildcode       
       
 - job:
     name: builddeploy
     run: playbooks/builddeploy.yaml
-    parent: base
+    parent: buildimage
     
 - project:
     checklabel_both:
@@ -73,12 +79,16 @@
            nodeset: nafta-node          
     check_emea:
       jobs:
+        - buildvariables:
+            nodeset: emea-node
         - buildcode:
             host-vars:
               node1:
                 jfrog: "http://172.31.27.120:9083"
                 jfrog_api_token: "AKCp5dKPSCchSnYWq9RDxLwpTrEcMJpJR2ikAXMAr8CnHdaHMC9Jdykio1xWqRe68pga4NEpJ"
                 jfrog_docker: "ec2-13-126-181-144.ap-south-1.compute.amazonaws.com:9083"
+            dependencies:
+              - buildvariables
             nodeset: emea-node            
         - buildimage:
             dependencies:
