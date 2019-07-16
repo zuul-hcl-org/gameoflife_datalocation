@@ -1,12 +1,15 @@
 - hosts: all
   tasks:
+     - shell: |
+            echo {{ zuul.change_url }} | cut -d '/' -f 7
+       register: pullid
+      
     - name: Modify the kubedeploy.yml file
       replace:
         path: /home/ec2-user/work/kubedeploy.yml
-        after: 'image: '
-        before: '/docker-local/'
-        regexp: '^(.+)$'
-        replace: '{{ jfrog_docker }}'
+        efore: '/docker-local/tomcat:latest'
+        regexp: 'dummy.com/docker-local/tomcat:latest'
+        replace: '{{ jfrog_docker }}/docker-local/tomcat:{{ pullid.stdout }}'
       
     - name: deploy to kubernetes
       shell: |
