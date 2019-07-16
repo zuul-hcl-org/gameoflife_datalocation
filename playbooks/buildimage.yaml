@@ -22,7 +22,7 @@
        
     - name: Copy the input files from project work dir to home folder of user
       shell: |
-           cp -ar ~/work/{{ zuul.project.short_name }}/{{ data_location }}_input /home/ec2-user/work/
+           cp -ar ~/work/{{ data_location }}_input /home/ec2-user/work/
       register: copy_status     
                     
     - name: build the docker file
