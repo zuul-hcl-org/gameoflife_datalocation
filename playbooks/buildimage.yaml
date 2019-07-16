@@ -20,10 +20,10 @@
     - set_fact:
        data_location="{{location.stdout}}"
        
-    - name: Copy the input files from project work dir to home folder of user
-      shell: |
-           cp -ar ~/work/{{ data_location }}_input /home/ec2-user/work/
-      register: copy_status     
+#    - name: Copy the input files from project work dir to home folder of user
+#      shell: |
+#           cp -ar ~/work/{{ data_location }}_input /home/ec2-user/work/
+#      register: copy_status     
                     
     - name: build the docker file
       shell: | 
