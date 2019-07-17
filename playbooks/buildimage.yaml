@@ -27,8 +27,8 @@
        data_location="{{location.stdout}}"
 
     - shell: |
-           if [{{ data_location }} == "emea"]
-            inputfiles_location="{{ zuul_input_location_1 }}"
+           if ["{{ data_location }}" == "emea"]
+            inputfiles_location="{{ zuul_input_location_1.stdout }}"
            else
             inputfiles_location="{{ zuul_input_location_2.stdout }}"" 
        
