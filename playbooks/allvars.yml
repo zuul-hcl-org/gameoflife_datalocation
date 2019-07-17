@@ -9,6 +9,10 @@
     - shell: |
          echo {{ zuul.change_url }} | cut -d '/' -f 7
       register: pullid
+      
+    - set_fact:
+       pull_id="{{pullid.stdout}}"
+       
     - name: getting the project name of pull request
       debug:
        msg: "{{ zuul.project.name }}"
@@ -17,6 +21,7 @@
        msg: "{{ pullid }}"
     - set_fact:
        pull_id="{{pullid.stdout}}"
+       
     - shell: |
            curl -s https://api.github.com/repos/{{ zuul.project.name }}/pulls/{{ pull_id }}| jq .head.ref
       register: branch
@@ -62,28 +67,27 @@
     - set_fact:
        nafta_artifacts={{nafta_artifact_location.stdout}}    
        
-    - zuul_return:
-        - data:
-            zuul_rosbag_location: "{{ location }}"
-        - data:
-            zuul_input_location_1: "{{ input_location_1 }}"
        
-#    - zuul_return:
-#        data:
-#          zuul_rosbag_location: "{{ location }}"
+    - zuul_return:
+        data:
+          zuul_pull_id: "{{ pull_id }}"   
+       
+    - zuul_return:
+        data:
+          zuul_rosbag_location: "{{ location }}"
           
-#    - zuul_return:
-#        data:
-#          zuul_input_location_1: "{{ input_location_1 }}"
+    - zuul_return:
+        data:
+          zuul_input_location_1: "{{ input_location_1 }}"
           
-#    - zuul_return:
-#        data:     
-#          zuul_input_location_2: "{{ input_location_2 }}" 
+    - zuul_return:
+        data:     
+          zuul_input_location_2: "{{ input_location_2 }}" 
      
-#   - zuul_return:
-#        data:     
-#          zuul_emea_artifact_location: "{{ emea_artifacts }}"
+   - zuul_return:
+        data:     
+          zuul_emea_artifact_location: "{{ emea_artifacts }}"
            
-#    - zuul_return:
-#        data:     
-#          zuul_nafta_artifact_location: "{{ nafta_artifacts }}" 
+    - zuul_return:
+        data:     
+          zuul_nafta_artifact_location: "{{ nafta_artifacts }}" 
