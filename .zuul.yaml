@@ -82,6 +82,8 @@
         - build_variables:
             nodeset: emea-node
         - build_code:
+            dependencies:
+              - build_variables
             host-vars:
               node1:
                 jfrog: "http://172.31.27.120:9083"
@@ -90,6 +92,7 @@
             nodeset: emea-node            
         - build_push_image:
             dependencies:
+              - build_variables 
               - build_code
             host-vars:
               node1:
@@ -99,6 +102,7 @@
             nodeset: emea-node            
         - deploy_kubernetes:
             dependencies:
+              - build_variables
               - build_code
               - build_push_image
             host-vars:
