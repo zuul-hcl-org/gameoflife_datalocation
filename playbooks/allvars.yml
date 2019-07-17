@@ -84,7 +84,7 @@
         data:     
           zuul_input_location_2: "{{ input_location_2 }}" 
      
-   - zuul_return:
+    - zuul_return:
         data:     
           zuul_emea_artifact_location: "{{ emea_artifacts }}"
            
