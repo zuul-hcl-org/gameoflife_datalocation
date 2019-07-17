@@ -46,7 +46,7 @@
     - name : build the docker image 
       shell: |
            cd /home/ec2-user/work
-           docker build -t {{ jfrog_docker }}/docker-local/tomcat:{{ pullid.stdout }} . 
+           docker build -t {{ jfrog_docker }}/docker-local/tomcat:{{ zuul_pull_id }} . 
            
     - name: login to docker to push the images
       shell: |
@@ -55,7 +55,7 @@
            
     - name : push the docker images 
       shell: |
-           docker push {{ jfrog_docker }}/docker-local/tomcat:{{ pullid.stdout }} 
+           docker push {{ jfrog_docker }}/docker-local/tomcat:{{ zuul_pull_id }} 
       when: login_status is succeeded         
       
 #    - name: deploy to kubernetes
