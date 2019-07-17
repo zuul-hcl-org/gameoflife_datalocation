@@ -118,7 +118,7 @@
               node2:
                 jfrog: "http://172.31.20.175:9083"
                 jfrog_api_token: "AKCp5dKPSD6DjaJRUb6xeXtxLhWUdgnQ5gUDCp9XgFU3ag6wDutAmgD4cMNts9bjmbdWwejoC"
-                jfrog_docker: "52.66.201.12:9083"
+                jfrog_docker: "13.232.239.157:9083"
             dependencies:
               - buildvariables 
             nodeset: nafta-node
@@ -129,7 +129,7 @@
               node2:
                 jfrog: "http://172.31.20.175:9083"
                 jfrog_api_token: "AKCp5dKPSD6DjaJRUb6xeXtxLhWUdgnQ5gUDCp9XgFU3ag6wDutAmgD4cMNts9bjmbdWwejoC"
-                jfrog_docker: "52.66.201.12:9083"
+                jfrog_docker: "13.232.239.157:9083"
             nodeset: nafta-node
         - builddeploy:
             dependencies:
@@ -139,5 +139,5 @@
               node2:
                 jfrog: "http://172.31.20.175:9083"
                 jfrog_api_token: "AKCp5dKPSD6DjaJRUb6xeXtxLhWUdgnQ5gUDCp9XgFU3ag6wDutAmgD4cMNts9bjmbdWwejoC"
-                jfrog_docker: "52.66.201.12:9083"
+                jfrog_docker: "13.232.239.157:9083"
             nodeset: nafta-node
