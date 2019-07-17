@@ -9,11 +9,11 @@
         url: "{{ jfrog }}/artifactory/generic-local/gameoflife-{{ zuul_pull_id }}.war"
         dest: /home/ec2-user/work
         
-    - set_fact: set input_location variable for emea
-        input_location_emea={{zuul_input_location_1.stdout}}
+ #   - set_fact: set input_location variable for emea
+ #       input_location_emea={{ zuul_input_location_1 }}
         
-    - set_fact: set input_location variable for emea
-        input_location_nafta={{zuul_input_location_2.stdout}}    
+ #   - set_fact: set input_location variable for emea
+ #       input_location_nafta={{ zuul_input_location_2 }}    
         
     - name: Get the pipeline name in which job is being run
       debug:
@@ -28,9 +28,9 @@
 
     - shell: |
            if ["{{ data_location }}" == "emea"]; then
-            inputfiles_location="{{ zuul_input_location_1.stdout }}";
+            inputfiles_location="{{ zuul_input_location_1 }}";
            else
-            inputfiles_location="{{ zuul_input_location_2.stdout }}" ;
+            inputfiles_location="{{ zuul_input_location_2 }}" ;
            fi 
        
 #    - name: Copy the input files from project work dir to home folder of user
