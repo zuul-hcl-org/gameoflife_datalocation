@@ -1,14 +1,14 @@
 - hosts: all
   tasks:
-    - shell: |
-           echo {{ zuul.change_url }} | cut -d '/' -f 7
-      register: pullid
+#    - shell: |
+#           echo {{ zuul.change_url }} | cut -d '/' -f 7
+#      register: pullid
       
     - name: Modify the kubedeploy.yml file
       replace:
         path: /home/ec2-user/work/kubedeploy.yml
         regexp: 'dummy.com/docker-local/tomcat:latest'
-        replace: '{{ jfrog_docker }}/docker-local/tomcat:{{ pullid.stdout }}'
+        replace: '{{ jfrog_docker }}/docker-local/tomcat:{{ zuul_pull_id }}'
       
     - name: deploy to kubernetes
       shell: |
