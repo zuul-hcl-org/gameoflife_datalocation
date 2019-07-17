@@ -48,19 +48,19 @@
        
     
 - job:
-    name: buildcode
+    name: build_code
     run: playbooks/buildcode.yaml
     parent: base
     
     
       
 - job:
-    name: buildimage
+    name: build_push_image
     run: playbooks/buildimage.yaml
     parent: base       
       
 - job:
-    name: builddeploy
+    name: deploy_kubernetes
     run: playbooks/builddeploy.yaml
     parent: base
     
@@ -81,7 +81,7 @@
       jobs:
         #- buildvariables:
         #    nodeset: emea-node
-        - buildcode:
+        - build_code:
             host-vars:
               node1:
                 jfrog: "http://172.31.27.120:9083"
@@ -90,19 +90,19 @@
             #dependencies:
              # - buildvariables
             nodeset: emea-node            
-        - buildimage:
+        - build_push_image:
             dependencies:
-              - buildcode
+              - build_code
             host-vars:
               node1:
                 jfrog: "http://172.31.27.120:9083"
                 jfrog_api_token: "AKCp5dKPSCchSnYWq9RDxLwpTrEcMJpJR2ikAXMAr8CnHdaHMC9Jdykio1xWqRe68pga4NEpJ"
                 jfrog_docker: "ec2-13-126-181-144.ap-south-1.compute.amazonaws.com:9083"
             nodeset: emea-node            
-        - builddeploy:
+        - deploy_kubernetes:
             dependencies:
-              - buildcode
-              - buildimage
+              - build_code
+              - build_push_image
             host-vars:
               node1:
                 jfrog: "http://172.31.27.120:9083"
@@ -113,7 +113,7 @@
       jobs:
        # - buildvariables:
        #     nodeset: nafta-node
-        - buildcode:
+        - build_code:
             host-vars: 
               node2:
                 jfrog: "http://172.31.20.175:9083"
@@ -122,19 +122,19 @@
         #    dependencies:
         #      - buildvariables 
             nodeset: nafta-node
-        - buildimage:
+        - build_push_image:
             dependencies:
-              - buildcode
+              - build_code
             host-vars: 
               node2:
                 jfrog: "http://172.31.20.175:9083"
                 jfrog_api_token: "AKCp5dKPSD6DjaJRUb6xeXtxLhWUdgnQ5gUDCp9XgFU3ag6wDutAmgD4cMNts9bjmbdWwejoC"
                 jfrog_docker: "13.232.239.157:9083"
             nodeset: nafta-node
-        - builddeploy:
+        - deploy_kubernetes:
             dependencies:
-              - buildcode
-              - buildimage
+              - build_code
+              - build_push_image
             host-vars:
               node2:
                 jfrog: "http://172.31.20.175:9083"
