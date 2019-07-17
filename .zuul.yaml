@@ -50,19 +50,19 @@
 - job:
     name: build_code
     run: playbooks/buildcode.yaml
-    parent: buildvariables
+    parent: build_variables
     
     
       
 - job:
     name: build_push_image
     run: playbooks/buildimage.yaml
-    parent: buildvariables       
+    parent: build_variables       
       
 - job:
     name: deploy_kubernetes
     run: playbooks/builddeploy.yaml
-    parent: buildvariables
+    parent: build_variables
     
 - project:
     checklabel_both:
