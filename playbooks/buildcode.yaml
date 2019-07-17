@@ -9,9 +9,9 @@
 #    - debug:
 #       msg: "{{ zuul.executor.work_root }}"
       
-    - shell: |
-            echo {{ zuul.change_url }} | cut -d '/' -f 7
-      register: pullid
+#    - shell: |
+#           echo {{ zuul.change_url }} | cut -d '/' -f 7
+#      register: pullid
  
     - name: "Deleted the workspace dir before build"
       shell: |
@@ -38,7 +38,7 @@
       
     - name: Push artifacts to jfrog repository
       uri:
-        url: "{{ jfrog }}/artifactory/generic-local/gameoflife-{{ pullid.stdout }}.war"
+        url: "{{ jfrog }}/artifactory/generic-local/gameoflife-{{ zuul_pull_id }}.war"
         #when: zuul_location in emea
         validate_certs: no
         method: PUT
