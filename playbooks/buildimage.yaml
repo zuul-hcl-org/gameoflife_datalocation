@@ -26,11 +26,11 @@
     - set_fact:
        data_location="{{location.stdout}}"
 
-     - shell: |
-            if [{{ data_location }} == "emea"]
-             inputfiles_location="{{ zuul_input_location_1 }}"
-            else
-             inputfiles_location="{{ zuul_input_location_2.stdout }}"" 
+    - shell: |
+           if [{{ data_location }} == "emea"]
+            inputfiles_location="{{ zuul_input_location_1 }}"
+           else
+            inputfiles_location="{{ zuul_input_location_2.stdout }}"" 
        
 #    - name: Copy the input files from project work dir to home folder of user
 #      shell: |
@@ -40,7 +40,7 @@
     - name: build the docker file
       shell: | 
            echo "FROM {{ jfrog_docker }}/docker-local/tomcat:latest" > /home/ec2-user/work/Dockerfile
-           echo "COPY gameoflife-{{ pullid.stdout }}.war   /usr/local/tomcat/webapps/" >> /home/ec2-user/work/Dockerfile
+           echo "COPY gameoflife-{{ zuul_pull_id }}.war   /usr/local/tomcat/webapps/" >> /home/ec2-user/work/Dockerfile
            echo "COPY $inputfiles_location_input   /usr/local/webapps/" >> /home/ec2-user/work/Dockerfile
            echo "RUN ls -laR /usr/local/webapps/*" >> /home/ec2-user/work/Dockerfile
     - name : build the docker image 
