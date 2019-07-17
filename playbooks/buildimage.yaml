@@ -27,10 +27,11 @@
        data_location="{{location.stdout}}"
 
     - shell: |
-           if ["{{ data_location }}" == "emea"]
-            inputfiles_location="{{ zuul_input_location_1.stdout }}"
+           if ["{{ data_location }}" == "emea"]; then
+            inputfiles_location="{{ zuul_input_location_1.stdout }}";
            else
-            inputfiles_location="{{ zuul_input_location_2.stdout }}"" 
+            inputfiles_location="{{ zuul_input_location_2.stdout }}" ;
+           fi 
        
 #    - name: Copy the input files from project work dir to home folder of user
 #      shell: |
