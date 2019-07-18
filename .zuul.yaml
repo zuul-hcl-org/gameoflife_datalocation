@@ -116,6 +116,8 @@
         - build_variables:
             nodeset: nafta-node
         - build_code:
+            dependencies:
+              - build_variables
             host-vars: 
               node2:
                 jfrog: "http://172.31.20.175:9083"
