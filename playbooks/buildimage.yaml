@@ -35,6 +35,9 @@
            echo {{ zuul_input_location_2 }}
       register: inputfiles    
       when: '"emea" not in data_location'    
+      
+    - set_fact:
+       inputfile_location="{{inputfiles.stdout}}"
         
 
 #    - shell: |
@@ -61,7 +64,7 @@
     - name: build the docker file
       shell: | 
            cd /home/ec2-user/work/
-           cp -r {{ inputfiles.stdout }}/* .
+           cp -r {{ inputfile_location }}/* .
            echo "FROM {{ jfrog_docker }}/docker-local/tomcat:latest" > /home/ec2-user/work/Dockerfile
            echo "COPY gameoflife-{{ zuul_pull_id }}.war   /usr/local/tomcat/webapps/" >> /home/ec2-user/work/Dockerfile
            echo "ADD input/*.*   /usr/local/tomcat/webapps/" >> /home/ec2-user/work/Dockerfile
