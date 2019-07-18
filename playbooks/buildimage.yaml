@@ -72,7 +72,7 @@
            echo "FROM {{ jfrog_docker }}/docker-local/tomcat:latest" > /home/ec2-user/work/Dockerfile
            echo "COPY gameoflife-{{ zuul_pull_id }}.war   /usr/local/tomcat/webapps/" >> /home/ec2-user/work/Dockerfile
            echo "ADD input/*.*   /usr/local/tomcat/webapps/" >> /home/ec2-user/work/Dockerfile
-           echo "RUN ls -laR /usr/local/webapps/*" >> /home/ec2-user/work/Dockerfile
+           echo "RUN ls -laR /usr/local/tomcat/webapps/*" >> /home/ec2-user/work/Dockerfile
            echo "CMD ./catalina.sh start"
            echo "EXPOSE 8080"
       when: '"nafta" not in data_location' 
