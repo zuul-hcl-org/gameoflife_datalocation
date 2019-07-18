@@ -38,7 +38,7 @@
        inputfiles="{{inputfiles_location.stdout}}" 
        
     - debug:
-        msg: "{{inputfiles_location.stdout}}"
+        msg: "{{ inputfiles }}"
        
 #    - name: Copy the input files from project work dir to home folder of user
 #      shell: |
