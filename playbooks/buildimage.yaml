@@ -29,10 +29,10 @@
     - shell: |
            if [{{ data_location }} == "emea"]; then
 #            inputfiles_location="{{ zuul_input_location_1 }}";
-            echo {{ zuul_input_location_1 }};
+            echo "{{ zuul_input_location_1 }}";
            else
 #            inputfiles_location="{{ zuul_input_location_2 }}" ;
-            echo {{ zuul_input_location_2 }};
+            echo "{{ zuul_input_location_2 }}";
            fi 
       register: inputfiles_location
       
