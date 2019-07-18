@@ -25,22 +25,33 @@
         
     - set_fact:
        data_location="{{location.stdout}}"
-
-    - shell: |
-           if [ {{ data_location }} == "emea"]; then
-            echo {{ zuul_input_location_1 }} 
-           else
-            echo {{ zuul_input_location_2 }}
-           fi 
-      args:
-       executable: /bin/bash    
-      register: inputfiles_location
-      
-    - set_fact:
-       inputfiles="{{inputfiles_location.stdout}}" 
        
-    - debug:
-        msg: "{{ inputfiles }}"
+    - shell: |
+           echo {{ zuul_input_location_1 }}
+      register: inputfiles   
+      when: '"nafta" not in data_location'  
+      
+    - shell: |
+           echo {{ zuul_input_location_2 }}
+      register: inputfiles    
+      when: '"emea" not in data_location'    
+        
+
+#    - shell: |
+#           if [ {{ data_location }} == "emea"]; then
+#            echo {{ zuul_input_location_1 }} 
+#           else
+#            echo {{ zuul_input_location_2 }}
+#           fi 
+#      args:
+#       executable: /bin/bash    
+#      register: inputfiles_location
+      
+#    - set_fact:
+#       inputfiles="{{inputfiles_location.stdout}}" 
+       
+#    - debug:
+#        msg: "{{ inputfiles }}"
        
 #    - name: Copy the input files from project work dir to home folder of user
 #      shell: |
@@ -49,9 +60,11 @@
                     
     - name: build the docker file
       shell: | 
+           cd /home/ec2-user/work/
+           cp -r {{ inputfiles.stdout }}/* .
            echo "FROM {{ jfrog_docker }}/docker-local/tomcat:latest" > /home/ec2-user/work/Dockerfile
            echo "COPY gameoflife-{{ zuul_pull_id }}.war   /usr/local/tomcat/webapps/" >> /home/ec2-user/work/Dockerfile
-           echo "COPY {{ inputfiles }}   /usr/local/tomcat/webapps/" >> /home/ec2-user/work/Dockerfile
+           echo "ADD {{ inputfiles }}/*.*   /usr/local/tomcat/webapps/" >> /home/ec2-user/work/Dockerfile
            echo "RUN ls -laR /usr/local/webapps/*" >> /home/ec2-user/work/Dockerfile
            echo "CMD ./catalina.sh start"
            echo "EXPOSE 8080"
