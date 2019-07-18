@@ -17,7 +17,7 @@
         
     - name: Get the pipeline name in which job is being run
       debug:
-        msg : "{{ zuul.pipeline }}"     
+        msg: "{{ zuul.pipeline }}"     
         
     - shell: |
            echo {{ zuul.pipeline }} | cut -d '_' -f 2
@@ -27,13 +27,20 @@
        data_location="{{location.stdout}}"
 
     - shell: |
-           if ["{{ data_location }}" == "emea"]; then
-            inputfiles_location="{{ zuul_input_location_1 }}";
-            echo $inputfiles_location
+           if [{{ data_location }} == "emea"]; then
+#            inputfiles_location="{{ zuul_input_location_1 }}";
+            echo {{ zuul_input_location_1 }}
            else
-            inputfiles_location="{{ zuul_input_location_2 }}" ;
-            echo inputfiles_location
+#            inputfiles_location="{{ zuul_input_location_2 }}" ;
+            echo {{ zuul_input_location_2 }}
            fi 
+      register: inputfiles_location
+      
+      set_fact:
+       inputfiles="{{inputfiles_location.stdout}}" 
+       
+      debug:
+        msg: "{{inputfiles}}"
        
 #    - name: Copy the input files from project work dir to home folder of user
 #      shell: |
@@ -44,7 +51,7 @@
       shell: | 
            echo "FROM {{ jfrog_docker }}/docker-local/tomcat:latest" > /home/ec2-user/work/Dockerfile
            echo "COPY gameoflife-{{ zuul_pull_id }}.war   /usr/local/tomcat/webapps/" >> /home/ec2-user/work/Dockerfile
-           echo "COPY $inputfiles_location   /usr/local/tomcat/webapps/" >> /home/ec2-user/work/Dockerfile
+           echo "COPY {{ inputfiles }}   /usr/local/tomcat/webapps/" >> /home/ec2-user/work/Dockerfile
            echo "RUN ls -laR /usr/local/webapps/*" >> /home/ec2-user/work/Dockerfile
            echo "CMD ./catalina.sh start"
            echo "EXPOSE 8080"
