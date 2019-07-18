@@ -34,8 +34,8 @@
            fi 
       register: inputfiles_location
       
-   # - set_fact:
-   #    inputfiles="{{inputfiles_location.stdout}}" 
+    - set_fact:
+       inputfiles="{{inputfiles_location.stdout}}" 
        
     - debug:
         msg: "{{inputfiles_location.stdout}}"
