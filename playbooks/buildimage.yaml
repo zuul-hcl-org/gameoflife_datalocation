@@ -39,7 +39,7 @@
       block:  
       - shell: |
            echo {{ zuul_input_location_2 }}
-      register: inputfiles_nafta  
+        register: inputfiles_nafta  
       - set_fact:
          inputfile_location_nafta="{{inputfiles_nafta.stdout}}"   
       when: '"emea" not in data_location'    
