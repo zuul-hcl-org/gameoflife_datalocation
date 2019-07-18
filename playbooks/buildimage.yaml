@@ -28,16 +28,19 @@
        
     - shell: |
            echo {{ zuul_input_location_1 }}
-      register: inputfiles   
+      register: inputfiles_emea   
       when: '"nafta" not in data_location'  
       
     - shell: |
            echo {{ zuul_input_location_2 }}
-      register: inputfiles    
+      register: inputfiles_nafta  
       when: '"emea" not in data_location'    
       
     - set_fact:
-       inputfile_location="{{inputfiles.stdout}}"
+       inputfile_location_emea="{{inputfiles_emea.stdout}}"
+       
+    - set_fact:
+       inputfile_location_nafta="{{inputfiles_nafta.stdout}}"   
         
 
 #    - shell: |
@@ -61,16 +64,30 @@
 #           cp -ar ~/work/{{ data_location }}_input /home/ec2-user/work/
 ##      register: copy_status     
                     
-    - name: build the docker file
+    - name: build the docker file for emea
       shell: | 
            cd /home/ec2-user/work/
-           cp -r {{ inputfile_location }}/* .
+           cp -r {{ inputfile_location_emea }}/* .
            echo "FROM {{ jfrog_docker }}/docker-local/tomcat:latest" > /home/ec2-user/work/Dockerfile
            echo "COPY gameoflife-{{ zuul_pull_id }}.war   /usr/local/tomcat/webapps/" >> /home/ec2-user/work/Dockerfile
            echo "ADD input/*.*   /usr/local/tomcat/webapps/" >> /home/ec2-user/work/Dockerfile
            echo "RUN ls -laR /usr/local/webapps/*" >> /home/ec2-user/work/Dockerfile
            echo "CMD ./catalina.sh start"
            echo "EXPOSE 8080"
+      when: '"nafta" not in data_location' 
+           
+    - name: build the docker file for nafta
+      shell: | 
+           cd /home/ec2-user/work/
+           cp -r {{ inputfile_location_nafta }}/* .
+           echo "FROM {{ jfrog_docker }}/docker-local/tomcat:latest" > /home/ec2-user/work/Dockerfile
+           echo "COPY gameoflife-{{ zuul_pull_id }}.war   /usr/local/tomcat/webapps/" >> /home/ec2-user/work/Dockerfile
+           echo "ADD input/*.*   /usr/local/tomcat/webapps/" >> /home/ec2-user/work/Dockerfile
+           echo "RUN ls -laR /usr/local/webapps/*" >> /home/ec2-user/work/Dockerfile
+           echo "CMD ./catalina.sh start"
+           echo "EXPOSE 8080" 
+      when: '"emea" not in data_location'
+           
     - name : build the docker image 
       shell: |
            cd /home/ec2-user/work
