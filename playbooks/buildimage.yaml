@@ -26,23 +26,24 @@
     - set_fact:
        data_location="{{location.stdout}}"
        
-    - shell: |
-           echo {{ zuul_input_location_1 }}
-      register: inputfiles_emea   
+    - name: block to check emea input files
+      block:  
+      - shell: |
+             echo {{ zuul_input_location_1 }}
+        register: inputfiles_emea   
+      - set_fact:
+         inputfile_location_emea="{{inputfiles_emea.stdout}}"
       when: '"nafta" not in data_location'  
       
-    - shell: |
+    - name: block to check nafta input files
+      block:  
+      - shell: |
            echo {{ zuul_input_location_2 }}
       register: inputfiles_nafta  
+      - set_fact:
+       inputfile_location_nafta="{{inputfiles_nafta.stdout}}"   
       when: '"emea" not in data_location'    
       
-    - set_fact:
-       inputfile_location_emea="{{inputfiles_emea.stdout}}"
-       
-    - set_fact:
-       inputfile_location_nafta="{{inputfiles_nafta.stdout}}"   
-        
-
 #    - shell: |
 #           if [ {{ data_location }} == "emea"]; then
 #            echo {{ zuul_input_location_1 }} 
