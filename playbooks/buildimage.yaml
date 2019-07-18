@@ -33,7 +33,7 @@
             echo {{ zuul_input_location_2 }}
            fi 
       args:
-      executable: /bin/bash    
+       executable: /bin/bash    
       register: inputfiles_location
       
     - set_fact:
