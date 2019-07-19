@@ -122,7 +122,7 @@
               node2:
                 jfrog: "http://172.31.20.175:9083"
                 jfrog_api_token: "AKCp5dKPSD6DjaJRUb6xeXtxLhWUdgnQ5gUDCp9XgFU3ag6wDutAmgD4cMNts9bjmbdWwejoC"
-                jfrog_docker: "13.232.239.157:9083" 
+                jfrog_docker: "13.127.210.174:9083" 
             nodeset: nafta-node
         - build_push_image:
             dependencies:
@@ -131,7 +131,7 @@
               node2:
                 jfrog: "http://172.31.20.175:9083"
                 jfrog_api_token: "AKCp5dKPSD6DjaJRUb6xeXtxLhWUdgnQ5gUDCp9XgFU3ag6wDutAmgD4cMNts9bjmbdWwejoC"
-                jfrog_docker: "13.232.239.157:9083"
+                jfrog_docker: "13.127.210.174:9083"
             nodeset: nafta-node
         - deploy_kubernetes:
             dependencies:
@@ -141,5 +141,5 @@
               node2:
                 jfrog: "http://172.31.20.175:9083"
                 jfrog_api_token: "AKCp5dKPSD6DjaJRUb6xeXtxLhWUdgnQ5gUDCp9XgFU3ag6wDutAmgD4cMNts9bjmbdWwejoC"
-                jfrog_docker: "13.232.239.157:9083"
+                jfrog_docker: "13.127.210.174:9083"
             nodeset: nafta-node
